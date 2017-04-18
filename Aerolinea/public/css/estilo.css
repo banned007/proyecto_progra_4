@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 body {
-	font-family: 'Droid Sans', sans-serif;;
+	font-family: 'Droid Sans', sans-serif;
 }
 
 .fondo-menu {
@@ -18,7 +18,7 @@ body {
 
 .menu-principal {
 	width: auto;
-        max-width: 1000px;
+        max-width: 1100px;
         margin:  auto;
 
 }
@@ -37,16 +37,18 @@ nav {
         list-style: none;
 }
 
-.menu li a {
+li a {
 	color: #444;
 	display: block;
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 20px;
 	padding: 6px 12px;
 	margin: 8px 8px;
 	vertical-align: middle;
 	text-decoration: none;
         width: auto;
+        font-family: 'Droid Sans', sans-serif;
+        text-align: center;
 }
 .titulo1 {
     font-size: 40px;
@@ -54,10 +56,12 @@ nav {
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     vertical-align: middle;
+    text-align: center;
+    
     
 }
 
-.menu li a:hover {
+li a:hover {
 
 	border-radius: 12px;
 	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
@@ -74,17 +78,18 @@ nav {
 	transition: opacity 1s ease;
 }
 
-.menu ul li {
+ul li {
+        display: inline-block;
         list-style: none;
 	float: none;
 }
 
-.menu ul a {
+ul a {
 	white-space: nowrap;
 }
 
 /* Displays the dropdown on hover and moves back into position */
-.menu li:hover ul {
+li:hover ul {
 
 	border-radius: 0 0 6px 6px;
 	box-shadow: inset 0px 2px 4px rgba(0,0,0,0.4);
@@ -93,7 +98,7 @@ nav {
 }
 
 /* Persistant Hover State */
-.menu li:hover a {
+li:hover a {
 
 
 	border-radius: 12px;
@@ -101,13 +106,13 @@ nav {
 	color: #222;
 }
 
-.menu li:hover ul a {
+li:hover ul a {
 	background: none;
 	border-radius: 0;
 	box-shadow: none;
 }
 
-.menu li:hover ul li a:hover {
+ li:hover ul li a:hover {
 
 	border-radius: 12px;
 	box-shadow: inset 0px 0px 4px 2px rgba(0,0,0,0.3);
@@ -120,3 +125,13 @@ nav {
    
 }
 
+@media all and (max-width: 480px) {
+    ul { height: auto; }
+    ul li { float: none; width: 100%; }
+    ul li li {position: relative;}
+    ul a { line-height: 40px; }
+    ul ul { position: relative; }
+    .show-menu {
+		display:block;
+	}
+}
