@@ -18,6 +18,8 @@ body {
 
 .menu-principal {
 	width: auto;
+        max-width: 1000px;
+        margin:  auto;
 
 }
 
@@ -51,6 +53,7 @@ nav {
     font-weight: bold;
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    vertical-align: middle;
     
 }
 
@@ -111,8 +114,9 @@ nav {
 }
 
 #icon-plane{
-    width: 100px;
-    height: 100px;
-    src: url('../img/plane.png');
+    width: 50px;
+    height: 50px;
+    vertical-align: top;
+   
 }
 
