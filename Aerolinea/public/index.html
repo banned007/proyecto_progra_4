@@ -1,83 +1,40 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
+<head>
+<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Aerolineas </title>
+        <title>Aerolineas EXODUS</title>
         <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
-        <link rel="stylesheet" title="normal" type="text/css" href="css/w3.css">
-    </head>
-    <body>
+</head>
+<body>
 
-        <div class="menu-principal">
-	
-	<nav>
-            
-		<ul class="menu">
-                        
-                        <li class="titulo1"><img id="icon-plane" src="img/plane.png">&nbsp Aerolineas LAXA</li>
-			<li><a href="index.html">Inicio</a></li>
-                        <li><a href="#"> Mi Perfil</a>
-				<ul>
-					<li><a href="#">Check In</a></li>
+<div class="topnav" id="myTopnav">
+    <ul class="nav">
+    <li><a href="#home" class="titulo1">Aerolineas EXODUS</a></li>
+    <li><a href="#home">Inicio</a></li>
+    <li><a href="#perfil">Mi Perfil</a>
+        <ul><li><a href="#p">Check In</a></li></ul>
+    </li>
+    <li><a href="#about">Acerca de nosotros</a></li>
+    <li><a href="#about">Contáctenos</a></li>
+    </ul>
+    <ul class="icon">
+    <li><a href="javascript:void(0);" style="font-size:15px;"  onclick="topNav()">&#9776;</a></li>
+    </ul>
+</div>
+<script>
+function topNav() {
+    var nav = document.getElementById("myTopnav");
+    if (nav.className === "topnav") {
+        nav.className += " responsive";
+    } else {
+        nav.className = "topnav";
+    }
+}
+</script>
 
-				</ul>
-			</li>
-			<li><a href="#"> Acerca de Nosotros</a>
-				<ul>
-					<li><a href="#">Company History</a></li>
-					<li><a href="#">Meet the team</a></li>
-				</ul>
-			</li>
-			<li><a href="#">Contactenos</a>
-				<ul>
-					<li><a href="#">Contact Us</a></li>
-					<li><a href="#">Directions</a></li>
-				</ul>
-			</li>
-		</ul>
-		<div class="fondo-menu"></div>
-	</nav>
-	</div>
-        <br><br><br>
-        <div class="w3-content w3-display-container">
-            <img class="mySlides" src="img\Avion1.jpg" style="width:100%" name="1">
-            <img class="mySlides" src="img\Avion2.jpg" style="width:100%" name="2">
-            <img class="mySlides" src="img\Avion3.jpg" style="width:100%" name="3">
-            <img class="mySlides" src="img\Avion4.jpg" style="width:100%" name="4">
 
-            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-        </div>
 
-        <script>
-        var slideIndex = 1;
-        showDivs(slideIndex);
-
-        function plusDivs(n) {
-          showDivs(slideIndex += n);
-        }
-
-        function showDivs(n) {
-          var i;
-                var x = document.getElementsByClassName("mySlides");
-                if (n > x.length) {
-                    slideIndex = 1
-                }
-                if (n < 1) {
-                    slideIndex = x.length
-                }
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                x[slideIndex - 1].style.display = "block";
-            }
-        </script>
-
-    </body>
+</body>
 </html>
