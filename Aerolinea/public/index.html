@@ -4,138 +4,160 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aerolineas EXODUS</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Love+Ya+Like+A+Sister" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-		<!-- Google Web Fonts -->
+        <!-- Google Web Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>    
         <link href='http://fonts.googleapis.com/css?family=Indie Flower&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-            
+
         <!--Products-carousel CSS style -->
         <link href="css/product-carousel.css" rel="stylesheet">     
-        
+
         <link rel="stylesheet" href="css/animate.css">   
+        <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
     </head>
     <body>
 
-        <div class="topnav" id="myTopnav">
-            <ul class="nav">
-                <li><a href="#home" class="titulo1">Aerolineas EXODUS</a></li>
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#perfil">Mi Perfil</a>
-                    <ul><li><a href="#p">Check In</a></li></ul>
-                </li>
-                <li><a href="#about">Acerca de nosotros</a></li>
-                <li><a href="#about">Contáctenos</a></li>
-            </ul>
-            <ul class="icon">
-                <li><a href="javascript:void(0);" style="font-size:15px;"  onclick="topNav()">&#9776;</a></li>
-            </ul>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-plane"></span>&nbsp Aerolíneas EXODUS</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Inicio</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mi Perfil<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Check-In</a></li>
+                                <li><a href="#">Historial</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="usuario.html">Acerca de nosotros</a></li>
+                        <li><a href="#">Contactenos</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <br><br>
+    <div class="container text-center"><h1 class="text-center">Vuelos en descuento</h1>
+        <div class="row">
+            <div class="carousel slide row innerbkground" data-ride="carousel" data-type="multi" data-interval="3000" id="productscarousel">
+
+                <div class="carousel-inner" id="carousel">
+
+
+                </div>
+
+                <a class="left carousel-control" href="#productscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
+                <a class="right carousel-control" href="#productscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
+            </div>
         </div>
-            <div class="container text-center"><h1 class="text-center">Vuelos en descuento</h1>
-                <div class="row">
-                    <div class="carousel slide row innerbkground" data-ride="carousel" data-type="multi" data-interval="3000" id="productscarousel">
+        <div class="space">
+        </div>
+    </div>                                                       
+    <!-- Complete range of products / small carousel ending here -->
 
-                        <div class="carousel-inner" id="carousel">
-                        
+    <!-- Required JavaScript libraris collection -->    
+    <!--The jQuery library from local-->    
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- Bootstrap library from local -->        
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-                        </div>
+    <!-- In own hosting -->
+    <!-- <script src="js/wow.min.js"></script>-->
 
-                        <a class="left carousel-control" href="#productscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+    <!-- In own hosting -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.0.3/wow.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-                        <a class="right carousel-control" href="#productscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
-                    </div>
-                </div>
-                <div class="space">
-                </div>
-            </div>                                                       
-        <!-- Complete range of products / small carousel ending here -->
+    <script>
+        //Initializing WOW aninations
+        new WOW().init();
 
-        <!-- Required JavaScript libraris collection -->    
-        <!--The jQuery library from local-->    
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <!-- Bootstrap library from local -->        
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        //Small carosel code set here
+        jQuery('.carousel[data-type="multi"] .item').each(function () {
+            var next = jQuery(this).next();
+            if (!next.length) {
+                next = jQuery(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo(jQuery(this));
 
-        <!-- In own hosting -->
-        <!-- <script src="js/wow.min.js"></script>-->
+            for (var i = 0; i < 2; i++) {
+                next = next.next();
+                if (!next.length) {
+                    next = jQuery(this).siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+        var c = document.getElementById("carousel");
+        var item = "";
+        item = c.childElementCount == 0 ? "item active" : "item";
+        var a = "<div class=" + item + ">";
+        a += "<div class=\"col-md-3 col-sm-4 col-xs-12\">";
 
-        <!-- In own hosting -->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.0.3/wow.min.js"></script>-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        
-        <script>
-          //Initializing WOW aninations
-          new WOW().init();
-
-	//Small carosel code set here
-    jQuery('.carousel[data-type="multi"] .item').each(function(){
-		var next = jQuery(this).next();
-		if (!next.length) {
-			next = jQuery(this).siblings(':first');
-		}
-		next.children(':first-child').clone().appendTo(jQuery(this));
-	  
-		for (var i=0;i<2;i++) {
-			next=next.next();
-			if (!next.length) {
-				next = jQuery(this).siblings(':first');
-			}
-			next.children(':first-child').clone().appendTo($(this));
-		}
-	});
-        var c=document.getElementById("carousel");
-        var item="";
-        item = c.childElementCount==0 ? "item active" : "item";
-        var a="<div class="+item+">";
-                                a+="<div class=\"col-md-3 col-sm-4 col-xs-12\">";
-
-                                    a+="<div class=\"spe-prods\">";
-                                        a+="<div class=\"mainbox\">";
-                                            a+="<h3>A Smartphone</h3>";//encabezado de producto
-                                            a+="<img src=\"img/products/p1.png\" alt=\"\">";//link de imagen
-                                        a+="</div>";
-                                        a+="<div class=\"price-big\">";
-                                            a+="<div>"
-                                                a+="<div class=\"floatting-price\">";
-                                                    a+="<h3>$99</h3>";//precio
-                                                a+="</div>";
-                                                a+="<div class=\"month\">";
-                                                    a+="<p>/ piece</p>";
-                                                a+="</div>";
-                                            a+="</div>";
-                                            a+="<div class=\"ordersection\">";
-                                                a+="<a href=\"#\" class=\"buybtn\">Order</a>";
-                                            a+="</div>";
-                                        a+="</div>";
-                                    a+="</div>";
+        a += "<div class=\"spe-prods\">";
+        a += "<div class=\"mainbox\">";
+        a += "<h3>A Smartphone</h3>";//encabezado de producto
+        a += "<img src=\"img/products/p1.png\" alt=\"\">";//link de imagen
+        a += "</div>";
+        a += "<div class=\"price-big\">";
+        a += "<div>"
+        a += "<div class=\"floatting-price\">";
+        a += "<h3>$99</h3>";//precio
+        a += "</div>";
+        a += "<div class=\"month\">";
+        a += "<p>/ piece</p>";
+        a += "</div>";
+        a += "</div>";
+        a += "<div class=\"ordersection\">";
+        a += "<a href=\"#\" class=\"buybtn\">Order</a>";
+        a += "</div>";
+        a += "</div>";
+        a += "</div>";
 
 
-                                a+="</div>";
-                            a+="</div>";
-        var b=document.createElement("div");
-        b.innerHTML=a;
-        
+        a += "</div>";
+        a += "</div>";
+        var b = document.createElement("div");
+        b.innerHTML = a;
+
         c.appendChild(b);
-        
-        
-    //Ending of small carosel
-
-        </script>
 
 
-<script>
-function topNav() {
-    var nav = document.getElementById("myTopnav");
-    if (nav.className === "topnav") {
-        nav.className += " responsive";
-    } else {
-        nav.className = "topnav";
-    }
-}
-</script>
+        //Ending of small carosel
+
+    </script>
+
+
+    <script>
+        function topNav() {
+            var nav = document.getElementById("myTopnav");
+            if (nav.className === "topnav") {
+                nav.className += " responsive";
+            } else {
+                nav.className = "topnav";
+            }
+        }
+    </script>
 
 
 
