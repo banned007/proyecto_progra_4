@@ -10,6 +10,13 @@ and open the template in the editor.
 
 body {margin:0;}
 
+.navbar{
+    background-color: black;
+    color:white;
+    
+}
+
+
 .navbar .navbar-brand {
     font-family: 'Cabin Sketch', cursive;
     font-size: 35px;
@@ -26,6 +33,8 @@ body {margin:0;}
     background-color: #256E5D;
     border-radius: 12px;  
 }
+
+
 
 
 
