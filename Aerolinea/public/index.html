@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aerolineas EXODUS</title>
+        <script type="text/javascript" src="js/Ciudad.js"></script>
+        <script type="text/javascript" src="js/Vuelo.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,6 +22,11 @@
         <link rel="stylesheet" href="css/animate.css">   
         <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
+
+        <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
+
+
+
     </head>
     <body>
 
@@ -88,77 +95,147 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.0.3/wow.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
+
+
     <script>
-        //Initializing WOW aninations
-        new WOW().init();
+        function AirModel() {
+            this.AirModel();
+        }
+        AirModel.prototype = {
+            AirModel: function () {
+                this.ciudades = this.initCiudades();
+                this.vuelos = this.initVuelos();
+                this.promo = this.initPromo();
+                this.buscados = [];
+            },
 
-        //Small carosel code set here
-        jQuery('.carousel[data-type="multi"] .item').each(function () {
-            var next = jQuery(this).next();
-            if (!next.length) {
-                next = jQuery(this).siblings(':first');
+            initCiudades: function () {
+                var ciudades = [
+                    new Ciudad("SJO", "San José", "Costa Rica"),
+                    new Ciudad("MIA", "Miami", "USA"),
+                    new Ciudad("GYA", "Guayaquil", "Ecuador"),
+                    new Ciudad("BTA", "Bogotá", "Colombia")
+                ];
+                return ciudades;
+            },
+
+            initPromo: function () {
+                var promo = [
+                    new Vuelo("00001", this.ciudades[0], this.ciudades[1], 200, "L", "08:00"),
+                    new Vuelo("00002", this.ciudades[1], this.ciudades[0], 300, "M", "09:00"),
+                    new Vuelo("00003", this.ciudades[2], this.ciudades[3], 400, "J", "10:00"),
+                    new Vuelo("00004", this.ciudades[3], this.ciudades[2], 500, "V", "11:00")
+                ];
+                return promo;
+            },
+
+            initVuelos: function () {
+                var vuelos = [
+                    new Vuelo("00001", this.ciudades[0], this.ciudades[1], 200, "L", "08:00"),
+                    new Vuelo("00002", this.ciudades[1], this.ciudades[0], 300, "M", "09:00"),
+                    new Vuelo("00003", this.ciudades[2], this.ciudades[3], 400, "J", "10:00"),
+                    new Vuelo("00004", this.ciudades[3], this.ciudades[2], 500, "V", "11:00")
+                ];
+                return vuelos;
             }
-            next.children(':first-child').clone().appendTo(jQuery(this));
 
-            for (var i = 0; i < 2; i++) {
-                next = next.next();
+
+
+
+        };
+    </script>
+    <script> //Controller
+        function AirController(model, view) {
+            this.AirController(model, view);
+        }
+
+        AirController.prototype = {
+            AirController: function (model, view) {
+                this.model = model;
+                this.view = view;
+            },
+
+            buscar: function () {
+                var origen = this.view.$("#origen").val();
+                var destino = this.view.$("#destino").val();
+                model.buscados = model.vuelos.filter(
+                        function (v) {
+                            return((v.origen.codigo.includes(origen.codigo) && (v.destino.codigo.includes(destino.codigo))));
+                        }
+                );
+                this.view.showBuscados();
+            }
+        };
+    </script>
+    <script> //View
+        var model;
+        var controller;
+
+        function pageLoad(event) {
+            model = new AirModel();
+            controller = new AirController(model, window);
+            showPromos(); //llenar el carousel  
+            new WOW().init();
+            jQuery('.carousel[data-type="multi"] .item').each(function () {
+                var next = jQuery(this).next();
                 if (!next.length) {
                     next = jQuery(this).siblings(':first');
                 }
-                next.children(':first-child').clone().appendTo($(this));
-            }
-        });
-        var c = document.getElementById("carousel");
-        var item = "";
-        item = c.childElementCount == 0 ? "item active" : "item";
-        var a = "<div class=" + item + ">";
-        a += "<div class=\"col-md-3 col-sm-4 col-xs-12\">";
+                next.children(':first-child').clone().appendTo(jQuery(this));
 
-        a += "<div class=\"spe-prods\">";
-        a += "<div class=\"mainbox\">";
-        a += "<h3>A Smartphone</h3>";//encabezado de producto
-        a += "<img src=\"img/products/p1.png\" alt=\"\">";//link de imagen
-        a += "</div>";
-        a += "<div class=\"price-big\">";
-        a += "<div>"
-        a += "<div class=\"floatting-price\">";
-        a += "<h3>$99</h3>";//precio
-        a += "</div>";
-        a += "<div class=\"month\">";
-        a += "<p>/ piece</p>";
-        a += "</div>";
-        a += "</div>";
-        a += "<div class=\"ordersection\">";
-        a += "<a href=\"#\" class=\"buybtn\">Order</a>";
-        a += "</div>";
-        a += "</div>";
-        a += "</div>";
+                for (var i = 0; i < 2; i++) {
+                    next = next.next();
+                    if (!next.length) {
+                        next = jQuery(this).siblings(':first');
+                    }
+                    next.children(':first-child').clone().appendTo($(this));
+                }
+            });
+        }
 
-
-        a += "</div>";
-        a += "</div>";
-        var b = document.createElement("div");
-        b.innerHTML = a;
-
-        c.appendChild(b);
-
-
-        //Ending of small carosel
-
-    </script>
-
-
-    <script>
-        function topNav() {
-            var nav = document.getElementById("myTopnav");
-            if (nav.className === "topnav") {
-                nav.className += " responsive";
-            } else {
-                nav.className = "topnav";
+        function showPromos() {
+            for (var a = 0; a < model.promo.length; a++)
+            {
+                addCarousel(model.promo[a]);
             }
         }
-    </script>
+        function addCarousel(vuelo) {
+            var c = document.getElementById("carousel");
+            var item = "";
+            item = c.childElementCount == 0 ? "item active" : "item";
+            var a = "";
+            a += "<div class=\"col-md-3 col-sm-4 col-xs-12\">";
 
+            a += "<div class=\"spe-prods\">";
+            a += "<div class=\"mainbox\">";
+            a += "<h3>" + vuelo.origen.nombre + " - " + vuelo.destino.nombre + "</h3>";//encabezado de producto
+            a += "<img src=\"img/" + vuelo.numero + ".jpg\" alt=\"\">";//link de imagen
+            a += "</div>";
+            a += "<div class=\"price-big\">";
+            a += "<div>"
+            a += "<div class=\"floatting-price\">";
+            a += "<h3>$" + vuelo.precio + "</h3>";//precio
+            a += "</div>";
+            a += "<div class=\"month\">";
+            a += "<p>/ piece</p>";
+            a += "</div>";
+            a += "</div>";
+            a += "<div class=\"ordersection\">";
+            a += "<a href=\"#\" class=\"buybtn\">Comprar</a>";
+            a += "</div>";
+            a += "</div>";
+            a += "</div>";
+
+
+            a += "</div>";
+            var b = document.createElement("div");
+            b.className=item;
+            b.innerHTML = a;
+
+            c.appendChild(b);
+        }
+        document.addEventListener("DOMContentLoaded",pageLoad)
+    </script>
 
 
 </body>
