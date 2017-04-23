@@ -1,28 +1,131 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Aerolineas EXODUS</title>
-        <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
-</head>
-<body>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-<div class="topnav" id="myTopnav">
-    <ul class="nav">
-    <li><a href="#home" class="titulo1">Aerolineas EXODUS</a></li>
-    <li><a href="#home">Inicio</a></li>
-    <li><a href="#perfil">Mi Perfil</a>
-        <ul><li><a href="#p">Check In</a></li></ul>
-    </li>
-    <li><a href="#about">Acerca de nosotros</a></li>
-    <li><a href="#about">Contáctenos</a></li>
-    </ul>
-    <ul class="icon">
-    <li><a href="javascript:void(0);" style="font-size:15px;"  onclick="topNav()">&#9776;</a></li>
-    </ul>
-</div>
+		<!-- Google Web Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>    
+        <link href='http://fonts.googleapis.com/css?family=Indie Flower&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+            
+        <!--Products-carousel CSS style -->
+        <link href="css/product-carousel.css" rel="stylesheet">     
+        
+        <link rel="stylesheet" href="css/animate.css">   
+        <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
+    </head>
+    <body>
+
+        <div class="topnav" id="myTopnav">
+            <ul class="nav">
+                <li><a href="#home" class="titulo1">Aerolineas EXODUS</a></li>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#perfil">Mi Perfil</a>
+                    <ul><li><a href="#p">Check In</a></li></ul>
+                </li>
+                <li><a href="#about">Acerca de nosotros</a></li>
+                <li><a href="#about">Contáctenos</a></li>
+            </ul>
+            <ul class="icon">
+                <li><a href="javascript:void(0);" style="font-size:15px;"  onclick="topNav()">&#9776;</a></li>
+            </ul>
+        </div>
+            <div class="container text-center"><h1 class="text-center">Vuelos en descuento</h1>
+                <div class="row">
+                    <div class="carousel slide row innerbkground" data-ride="carousel" data-type="multi" data-interval="3000" id="productscarousel">
+
+                        <div class="carousel-inner" id="carousel">
+                        
+
+                        </div>
+
+                        <a class="left carousel-control" href="#productscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
+                        <a class="right carousel-control" href="#productscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
+                    </div>
+                </div>
+                <div class="space">
+                </div>
+            </div>                                                       
+        <!-- Complete range of products / small carousel ending here -->
+
+        <!-- Required JavaScript libraris collection -->    
+        <!--The jQuery library from local-->    
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <!-- Bootstrap library from local -->        
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+        <!-- In own hosting -->
+        <!-- <script src="js/wow.min.js"></script>-->
+
+        <!-- In own hosting -->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.0.3/wow.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        
+        <script>
+          //Initializing WOW aninations
+          new WOW().init();
+
+	//Small carosel code set here
+    jQuery('.carousel[data-type="multi"] .item').each(function(){
+		var next = jQuery(this).next();
+		if (!next.length) {
+			next = jQuery(this).siblings(':first');
+		}
+		next.children(':first-child').clone().appendTo(jQuery(this));
+	  
+		for (var i=0;i<2;i++) {
+			next=next.next();
+			if (!next.length) {
+				next = jQuery(this).siblings(':first');
+			}
+			next.children(':first-child').clone().appendTo($(this));
+		}
+	});
+        var c=document.getElementById("carousel");
+        var item="";
+        item = c.childElementCount==0 ? "item active" : "item";
+        var a="<div class="+item+">";
+                                a+="<div class=\"col-md-3 col-sm-4 col-xs-12\">";
+
+                                    a+="<div class=\"spe-prods\">";
+                                        a+="<div class=\"mainbox\">";
+                                            a+="<h3>A Smartphone</h3>";//encabezado de producto
+                                            a+="<img src=\"img/products/p1.png\" alt=\"\">";//link de imagen
+                                        a+="</div>";
+                                        a+="<div class=\"price-big\">";
+                                            a+="<div>"
+                                                a+="<div class=\"floatting-price\">";
+                                                    a+="<h3>$99</h3>";//precio
+                                                a+="</div>";
+                                                a+="<div class=\"month\">";
+                                                    a+="<p>/ piece</p>";
+                                                a+="</div>";
+                                            a+="</div>";
+                                            a+="<div class=\"ordersection\">";
+                                                a+="<a href=\"#\" class=\"buybtn\">Order</a>";
+                                            a+="</div>";
+                                        a+="</div>";
+                                    a+="</div>";
+
+
+                                a+="</div>";
+                            a+="</div>";
+        var b=document.createElement("div");
+        b.innerHTML=a;
+        
+        c.appendChild(b);
+        
+        
+    //Ending of small carosel
+
+        </script>
+
+
 <script>
 function topNav() {
     var nav = document.getElementById("myTopnav");
