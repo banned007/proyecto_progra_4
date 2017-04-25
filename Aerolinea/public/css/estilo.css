@@ -14,6 +14,8 @@ body {margin:0;
 	height: 100%;
 	width: 100%;
 	overflow-x:hidden;   
+        background-image: url("../img/fondo.jpg");
+        background-size: cover;
 }
 
 .navbar{
@@ -25,7 +27,7 @@ body {margin:0;
 
 .navbar .navbar-brand {
     font-family: 'Cabin Sketch', cursive;
-    font-size: 3.8vw;
+    font-size: 2.8vw;
     padding-top: 0px;
     color:#1ABC9C;
 }
@@ -45,13 +47,15 @@ body {margin:0;
 }
 
 #panel2{
-    width: 60vw;
+   
     margin-left: auto;
     margin-right: auto;
     
 }
 
-
+.formulario .class-sm-8{
+    background-color: blue;
+}
 
 
 
@@ -81,7 +85,7 @@ body {margin:0;
      font-family: 'Love Ya Like A Sister', cursive;
 }
 
-table.grid{border:1px solid black; border-collapse: collapse; width: auto; margin-left: auto; margin-right: auto; }
+
 table.grid thead tr {border:1px solid black; background-color: black; color: #ffffff; }
 table.grid thead tr th{border:inherit;}
 
@@ -93,10 +97,6 @@ table.grid tbody td{border:1px solid black; }
 table.grid tbody tr:hover {background:#1ABC9C ;}
 
 table.grid tbody tr td{border:inherit;}
-
-table {
-    width: auto;
-}
 
 
 
