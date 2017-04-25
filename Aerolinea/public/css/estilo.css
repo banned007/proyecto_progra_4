@@ -14,6 +14,8 @@ body {margin:0;
 	height: 100%;
 	width: 100%;
 	overflow-x:hidden;   
+        background-image: url("../img/fondo.jpg");
+        background-size: cover;
 }
 
 .navbar{
@@ -25,7 +27,7 @@ body {margin:0;
 
 .navbar .navbar-brand {
     font-family: 'Cabin Sketch', cursive;
-    font-size: 3vw;
+    font-size: 2.8vw;
     padding-top: 0px;
     color:#1ABC9C;
 }
@@ -45,7 +47,7 @@ body {margin:0;
 }
 
 #panel2{
-    width: 60vw;
+
     margin-left: auto;
     margin-right: auto;
     
@@ -57,7 +59,11 @@ body {margin:0;
 
 .titulo1{
     font-family: 'Love Ya Like A Sister', cursive;
-    font-size: 40px;
+    font-size: 3vw;
+    background-color: white;
+    text-align: center;
+   
+    
 }
 
 .titulo2{
@@ -69,7 +75,7 @@ body {margin:0;
 .texto{
     font-family: 'Cabin Sketch', cursive;
     font-size: 15px;
-    color: 486486;
+    color: #486486;
 }
 
 .iconn{
@@ -80,9 +86,8 @@ body {margin:0;
 .input-append, .span2, .add-on{
      font-family: 'Love Ya Like A Sister', cursive;
 }
-table.log{width: auto; margin-left: auto; margin-right: auto; }
-a.log{width: auto; margin-left: auto; margin-right: auto; }
-table.grid{border:1px solid black; border-collapse: collapse; width: auto; margin-left: auto; margin-right: auto; }
+
+
 table.grid thead tr {border:1px solid black; background-color: black; color: #ffffff; }
 table.grid thead tr th{border:inherit;}
 
@@ -95,8 +100,10 @@ table.grid tbody tr:hover {background:#1ABC9C ;}
 
 table.grid tbody tr td{border:inherit;}
 
-table {
-    width: auto;
+
+
+p {
+text-align : justify;
 }
 /* Popup container */
 .popup {
@@ -105,53 +112,33 @@ table {
     cursor: pointer;
 }
 
-/* The actual popup (appears on top) */
-.popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
+#logoR{
+    float: right;
+}
+#logoL{
+    float: left;
+    margin-right:10px;
+    
+}
+
+#formularioDiv{
+    display: inline-block; 
+    vertical-align:middle; 
+    background-color: black;
+    position: relative;
+    width: 100%;
+    top: 50%;
+    margin-top: -15px; 
     text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
+}
+label{
+    color: white;
+    background-color: black;
 }
 
-/* Popup arrow */
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+.log tbody{
+    text-align: center;
 }
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-}
-
-
 
 
 
