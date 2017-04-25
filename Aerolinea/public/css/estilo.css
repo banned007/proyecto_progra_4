@@ -47,21 +47,23 @@ body {margin:0;
 }
 
 #panel2{
-   
+
     margin-left: auto;
     margin-right: auto;
     
 }
 
-.formulario .class-sm-8{
-    background-color: blue;
-}
+
 
 
 
 .titulo1{
     font-family: 'Love Ya Like A Sister', cursive;
-    font-size: 40px;
+    font-size: 3vw;
+    background-color: white;
+    text-align: center;
+   
+    
 }
 
 .titulo2{
@@ -73,7 +75,7 @@ body {margin:0;
 .texto{
     font-family: 'Cabin Sketch', cursive;
     font-size: 15px;
-    color: 486486;
+    color: #486486;
 }
 
 .iconn{
@@ -100,6 +102,37 @@ table.grid tbody tr td{border:inherit;}
 
 
 
+p {
+text-align : justify;
+}
+
+#logoR{
+    float: right;
+}
+#logoL{
+    float: left;
+    margin-right:10px;
+    
+}
+
+#formularioDiv{
+    display: inline-block; 
+    vertical-align:middle; 
+    background-color: black;
+    position: relative;
+    width: 100%;
+    top: 50%;
+    margin-top: -15px; 
+    text-align: center;
+}
+label{
+    color: white;
+    background-color: black;
+}
+
+.log tbody{
+    text-align: center;
+}
 
 
 

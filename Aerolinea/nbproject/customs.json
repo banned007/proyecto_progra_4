@@ -3,5 +3,9 @@
         "br": {},
         "style": {}
     },
-    "attributes": {}
+    "attributes": {
+        "color": {
+            "context": "p"
+        }
+    }
 }

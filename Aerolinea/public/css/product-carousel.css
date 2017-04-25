@@ -1,20 +1,33 @@
 /*A free multi product carousel display templaate by http://www.jquery-az.com/
 /* Typography
 ----------------------------------------------------------------------------- */
-
+html,
+body {
+	height: 100%;
+    font-family: 'Poiret One', sans-serif;
+	height: 100%;
+	width: 100%;
+	overflow-x:hidden;    
+}
 
 /*Headings styles from h1 to h6*/
-
-h3{
-    background-color: #B0F59A;
-    font-weight: 900;
+h1 {
+	color: #FF5B5B;
+    font-size: 34px;
+	font-weight: 900;
+	margin-bottom: 30px;
 }
+h1 span
+{
+	color: #271D18;
+}
+
 .ourbkground{
     background-color:#3F4DB8;
     
 }
 .innerbkground{
-    background-color:#DAEEE9;
+    background-color:white;
 }
 img {
 	display: block;
@@ -72,7 +85,7 @@ font-weight:500;
 
     text-align: center;
     margin-right: 1%;
- 
+    border: 1px solid #3f4db8;
 }
 .speciality {
     margin: 5% auto 0 auto;
@@ -84,7 +97,20 @@ font-weight:500;
     height:250px;
     padding: 1.5em;
 }
+.mainbox h3 {
+    font-size: 1.5em;
+    color: #fff;
+    text-transform: capitalize;
+    font-weight: 400;
+	
 
+  background: #683717; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left,rgba(104,55,23,0.9), rgba(61,45,39,0.1)); /*Safari 5.1-6*/
+  background: -o-linear-gradientrgba(104,55,23,0.9), rgba(61,45,39,0.1)); /*Opera 11.1-12*/
+  background: -moz-linear-gradientrgba(104,55,23,0.9), rgba(61,45,39,0.1)); /*Fx 3.6-15*/
+  background: linear-gradient(to right, rgba(58, 52, 140, 0.9), rgba(236,21,98,0.1)); /*Standard*/
+
+}
 .floatting-price {
     float: left;
 }
@@ -92,7 +118,7 @@ font-weight:500;
 .price-big h3 {
     font-size: 2.5em;
     color: #FFF;
-    background: #2ECC71;
+    background: #3F4DB8;
     padding: .27em .5em;
 }
 .price-big p {
@@ -107,8 +133,8 @@ font-weight:500;
 
 .ordersection {
     padding: 1em;
-    background:#B0F59A;
-
+    border:1px solid #3F4DB8;
+    background:#6686FF;
 }
 .buybtn {
    font-size: .85em;
@@ -233,10 +259,9 @@ a.buybtn {
 }
 
 .mainbox {
-    background: white;
+    background: #00A7F6;
     height:250px;
     padding: 1.5em;
-
     
     
 }
@@ -251,7 +276,7 @@ a.buybtn {
 
 .carousel-control.left, .carousel-control.right {
 	background-image:none;
-    color:#F01515;
+    color:#e81615;
 
 }
 

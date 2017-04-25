@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 
-function Ciudad(codigo, nombre, pais){
-    this.Ciudad(codigo, nombre, pais);
+function Ciudad(codigo, nombre, pais, zona){
+    this.Ciudad(codigo, nombre, pais, zona);
 }
 
 Ciudad.prototype={
-    Ciudad: function(codigo, nombre, pais){
+    Ciudad: function(codigo, nombre, pais, zona){
         this.codigo=codigo;
         this.nombre=nombre;
         this.pais=pais;
+        this.zona=zona;
     }
 };
 

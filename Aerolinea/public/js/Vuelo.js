@@ -4,18 +4,16 @@
  * and open the template in the editor.
  */
 
-function Vuelo(numero, origen, destino, precio, fecha, hora){
-    this.Vuelo(numero, origen, destino, precio, fecha, hora);
+function Vuelo(numero, horario, dia, asientosDisp){
+    this.Vuelo(numero, horario, dia, asientosDisp);
 }
 
 Vuelo.prototype={
-    Vuelo: function(numero, origen, destino, precio, fecha, hora){
+    Vuelo: function(numero, horario, dia, asientosDisp){
         this.numero=numero;
-        this.origen=origen;
-        this.destino=destino;
-        this.precio=precio;
-        this.fecha=fecha;
-        this.hora=hora;
+        this.horario=horario;
+        this.dia=dia;
+        this.asientosDisp=asientosDisp;
     }
 };
 
