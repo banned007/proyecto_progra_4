@@ -19,8 +19,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-
-
+        <script type="text/javascript" src="js/loging_pop.js"></script>
         <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
         <script src="js/ddmenu.js" type="text/javascript"></script>
 
@@ -29,19 +28,6 @@
     </head>
     <body>
         <a id="ddmenuLink" href="ddmenu-source.html">Menu</a>
-
-        <center>
- <input type="button" id="show_login" value="Show Login">
- <div id = "loginform">
-  <form method = "post" action = "">
-   <p>Join TalkersCode And get Quick Access To Our Tutorials,Questions,Web Tricks And Many More</p>
-   <input type = "image" id = "close_login" src = "images/close.png">
-   <input type = "text" id = "login" placeholder = "Email Id" name = "uid">
-   <input type = "password" id = "password" name = "upass" placeholder = "***">
-   <input type = "submit" id = "dologin" value = "Login">
-  </form>
- </div>
-</center>
         <div class="container">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -219,6 +205,7 @@
                 fillCombo();
 
                 listVuelos(model.buscados);
+                
             }
 
             function showPromos() {
