@@ -1,7 +1,7 @@
-function myFunction() {
-    window.password_prompt();
+function popup() {
+    window.login_popup();
 }
-window.password_prompt = function() {
+window.login_popup = function() {
 
     var label_message_user = "Usuario:";
     var label_message_pass = "Contraseña:"
