@@ -70,6 +70,11 @@ window.login_popup = function() {
     button.innerHTML = button_message;
     button.addEventListener("click", submit, false);
     div.appendChild(button);
+    
+    var button = document.createElement("button");
+    button.innerHTML = "Cancelar";
+    button.addEventListener("click", submit, false);
+    div.appendChild(button);
 
     document.body.appendChild(div);
     window.addEventListener("resize", resize, false);
