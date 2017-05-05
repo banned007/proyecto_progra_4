@@ -1,0 +1,138 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-abr-2017, 20:53:05
+    Author     : kerly
+*/
+
+body {margin:0;
+      	height: 100%;
+        font-family: 'Love Ya Like A Sister', cursive;
+	height: 100%;
+	width: 100%;
+	overflow-x:hidden;   
+        background-image: url("../img/fondo.jpg");
+        background-size: cover;
+}
+
+.navbar{
+    background-color: black;
+    color:white;
+    
+}
+
+
+.navbar .navbar-brand {
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 2.8vw;
+    padding-top: 0px;
+    color:#1ABC9C;
+}
+.navbar li{
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 20px;
+    
+}
+
+.navbar li:hover{
+    background-color: #1ABC9C;
+    border-radius: 12px;  
+}
+
+.panel-body {
+    background-color: #C9F1E9;
+}
+
+#panel2{
+
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+
+
+
+
+.titulo1{
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 3vw;
+    background-color: white;
+    text-align: center;
+   
+    
+}
+
+.titulo2{
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 20px;
+    color: #216556;
+}
+
+.texto{
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 15px;
+    color: #486486;
+}
+
+.iconn{
+    width: 40px;
+    height: 40px;
+}
+
+.input-append, .span2, .add-on{
+     font-family: 'Love Ya Like A Sister', cursive;
+}
+
+
+table.grid thead tr {border:1px solid black; background-color: black; color: #ffffff; }
+table.grid thead tr th{border:inherit;}
+
+
+table.grid tbody tr{border:1px solid black; background: white;}
+table.grid tbody td{border:1px solid black; }
+
+
+table.grid tbody tr:hover {background:#1ABC9C ;}
+
+table.grid tbody tr td{border:inherit;}
+
+
+
+p {
+text-align : justify;
+}
+
+#logoR{
+    float: right;
+}
+#logoL{
+    float: left;
+    margin-right:10px;
+    
+}
+
+#formularioDiv{
+    display: inline-block; 
+    vertical-align:middle; 
+    background-color: black;
+    position: relative;
+    width: 100%;
+    top: 50%;
+    margin-top: -15px; 
+    text-align: center;
+}
+label{
+    color: #1ABC9C;
+    background-color: black;
+}
+
+.log tbody{
+    text-align: center;
+}
+
+
+
