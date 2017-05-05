@@ -103,71 +103,11 @@
         this.AirModel();
     }
     
-        AirModel.prototype = {
-            AirModel: function () {
-                this.ciudades = this.initCiudades();
-                this.rutas = this.initRutas();
-                this.horarios = this.initHorarios();
-                this.vuelos = this.initVuelos();
-                this.promo = this.initPromo();
-                this.buscados = [];
-            },
+    AirModel.prototype = {
+        AirModel: function () {
 
-            initCiudades: function () {
-                var ciudades = [
-                    new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"),
-                    new Ciudad("MIA-", "Miami", "USA", "GMT-4"),
-                    new Ciudad("GYA-", "Guayaquil", "Ecuador", "GMT-5"),
-                    new Ciudad("BTA-", "Bogotá", "Colombia", "UTC-5")
-                ];
-                return ciudades;
-            },
-            
-            initRutas: function () {
-                var rutas = [
-                    new Ruta("00001", this.ciudades[0], this.ciudades[1], "01:30"),
-                    new Ruta("00002", this.ciudades[1], this.ciudades[0], "01:30"),
-                    new Ruta("00003", this.ciudades[2], this.ciudades[3], "01:30"),
-                    new Ruta("00004", this.ciudades[3], this.ciudades[2], "01:30")
-                ];
-                return rutas;
-            },
-            
-            initHorarios: function () {
-                var horarios = [
-                    new Horario("00001", this.rutas[0], "L", "08:30", 200),
-                    new Horario("00002", this.rutas[1], "M", "09:30", 300),
-                    new Horario("00003", this.rutas[2], "J", "10:30", 400),
-                    new Horario("00004", this.rutas[3], "V", "11:30", 500)
-                ];
-                return horarios;
-            },
-
-            initPromo: function () {
-                var promo = [
-                    new Vuelo("00001", this.horarios[0], "24-04-2017", 50),
-                    new Vuelo("00002", this.horarios[1], "25-04-2017", 50),
-                    new Vuelo("00003", this.horarios[2], "27-04-2017", 50),
-                    new Vuelo("00004", this.horarios[3], "28-04-2017", 50)
-                ];
-                return promo;
-            },
-
-            initVuelos: function () {
-                var vuelos = [
-                    new Vuelo("00001", this.horarios[0], "24-04-2017", 50),
-                    new Vuelo("00002", this.horarios[1], "25-04-2017", 50),
-                    new Vuelo("00003", this.horarios[2], "27-04-2017", 50),
-                    new Vuelo("00004", this.horarios[3], "28-04-2017", 50)
-                ];
-                return vuelos;
-            }
-
-            
-        
-        
-        
-    };
+        }
+    }; 
 </script>
 <script> //Controller
     function AirController(model, view){
@@ -196,7 +136,7 @@
             Proxy.vuelosSearch(origen, destino, function(result){
                 model.buscados=result;
                 view.showBuscados();
-            });
+            })
         }
     };
 </script>
