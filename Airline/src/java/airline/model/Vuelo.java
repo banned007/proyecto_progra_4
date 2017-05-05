@@ -9,7 +9,7 @@ package airline.model;
  *
  * @author kerly
  */
-public class Vuelo {
+public class Vuelo implements Jsonable{
 
     public Vuelo(String numero, Horario horario, String dia, int asientosDisp) {
         this.numero = numero;
