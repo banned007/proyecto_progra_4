@@ -13,6 +13,7 @@ JsonUtils.revive = function (k, v){
 	if(v instanceof Object && v._class == 'Vuelo'){
 		return new Vuelo(v.numero, v.horario, v.dia, v.asientosDisp);
 	}
+       return v;
 }
 
 JsonUtils.replacer = function (k, v){

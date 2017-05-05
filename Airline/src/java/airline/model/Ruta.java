@@ -9,7 +9,7 @@ package airline.model;
  *
  * @author kerly
  */
-public class Ruta {
+public class Ruta implements Jsonable {
 
     public Ruta(String numero, Ciudad origen, Ciudad destino, float duracion) {
         this.numero = numero;

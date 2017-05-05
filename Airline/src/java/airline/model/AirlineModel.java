@@ -38,10 +38,20 @@ public class AirlineModel {
         
         public List<Vuelo> getVuelos(String origen, String destino){
             ArrayList<Vuelo> result = new ArrayList();
-            for(Vuelo v: this.getVuelos()){
-                if(v.horario.ruta.origen.codigo.contains(origen) && v.horario.ruta.destino.codigo.contains(destino)) 
+            List<Vuelo> vuelos = this.getVuelos();
+            
+            String or = origen.substring(0, 4);
+            if(origen.substring(0, 1).equals("-"))
+                or = "";
+           
+            String dest="";
+            if(origen.length()>12)
+                 dest = origen.substring(12);
+            for(Vuelo v: vuelos){
+                if(v.horario.ruta.origen.codigo.contains(or) && v.horario.ruta.destino.codigo.contains(dest)) 
                     result.add(v);
             }
+            
             return result;
         }
 }

@@ -8,11 +8,11 @@
 
 
         <script type="text/javascript" src="js/Ciudad.js"></script>
-        <script type="text/javascript" src="js/Vuelo.js"></script>
         <script type="text/javascript" src="js/Ruta.js"></script>
         <script type="text/javascript" src="js/Horario.js"></script>
+        <script type="text/javascript" src="js/Vuelo.js"></script>
         <script type="text/javascript" src="js/Proxy.js"></script>
-        <script type="text/javascript" src="js/JasonUtils.js"></script>
+        <script type="text/javascript" src="js/JsonUtils.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Cabin+Sketch|Love+Ya+Like+A+Sister" rel="stylesheet">
         <link href="css/product-carousel.css" rel="stylesheet">     
@@ -108,10 +108,7 @@
         AirModel.prototype = {
             AirModel: function () {
         }
-            
-        
-        
-        
+   
     };
 </script>
 <script> //Controller
@@ -123,9 +120,7 @@
         AirController: function(model, view){
             this.model=model;
             this.view=view;
-            
-        },
-        llenar: function(){
+            console.log('wjkfjwelf');
             Proxy.getCiudades(function(result){
                 console.log('wjkfjwelf');
                 model.ciudades = result;
@@ -135,6 +130,8 @@
                 model.promo=result;
                 view.showPromos();
             });
+            model.buscados = [];
+            
         },
         
         buscar: function(){
@@ -157,7 +154,7 @@
             model = new AirModel();
             controller = new AirController(model, window);
             //showPromos(); //llenar el carousel  
-            controller.llenar();
+            
                         
              $('#salida').datepicker({ autoclose: true, language: 'es' });
              $('#salida').datepicker('update', new Date());
@@ -182,7 +179,7 @@
    
             });
  
-  
+           
   
         }
 
