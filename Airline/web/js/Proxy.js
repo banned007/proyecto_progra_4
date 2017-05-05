@@ -2,7 +2,7 @@ var Proxy = Proxy || {};
 
 Proxy.getCiudades = function(callBack){
 	var AJAX_req = new XMLHttpRequest();
-	url = "/Airline/AirlineService?action=ciudadListall";
+	url = "/Airline/AirlineService?action=ciudadListAll";
 	AJAX_req.open("GET", url, true);
 	AJAX_req.setRequestHeader("Content_type", "application/x-www-form-urlencoded");
 	AJAX_req.onreadystatechange = function(){

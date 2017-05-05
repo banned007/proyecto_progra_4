@@ -11,6 +11,8 @@
         <script type="text/javascript" src="js/Vuelo.js"></script>
         <script type="text/javascript" src="js/Ruta.js"></script>
         <script type="text/javascript" src="js/Horario.js"></script>
+        <script type="text/javascript" src="js/Proxy.js"></script>
+        <script type="text/javascript" src="js/JasonUtils.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Cabin+Sketch|Love+Ya+Like+A+Sister" rel="stylesheet">
         <link href="css/product-carousel.css" rel="stylesheet">     
@@ -105,64 +107,7 @@
     
         AirModel.prototype = {
             AirModel: function () {
-                this.ciudades = this.initCiudades();
-                this.rutas = this.initRutas();
-                this.horarios = this.initHorarios();
-                this.vuelos = this.initVuelos();
-                this.promo = this.initPromo();
-                this.buscados = [];
-            },
-
-            initCiudades: function () {
-                var ciudades = [
-                    new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"),
-                    new Ciudad("MIA-", "Miami", "USA", "GMT-4"),
-                    new Ciudad("GYA-", "Guayaquil", "Ecuador", "GMT-5"),
-                    new Ciudad("BTA-", "Bogotá", "Colombia", "UTC-5")
-                ];
-                return ciudades;
-            },
-            
-            initRutas: function () {
-                var rutas = [
-                    new Ruta("00001", this.ciudades[0], this.ciudades[1], "01:30"),
-                    new Ruta("00002", this.ciudades[1], this.ciudades[0], "01:30"),
-                    new Ruta("00003", this.ciudades[2], this.ciudades[3], "01:30"),
-                    new Ruta("00004", this.ciudades[3], this.ciudades[2], "01:30")
-                ];
-                return rutas;
-            },
-            
-            initHorarios: function () {
-                var horarios = [
-                    new Horario("00001", this.rutas[0], "L", "08:30", 200),
-                    new Horario("00002", this.rutas[1], "M", "09:30", 300),
-                    new Horario("00003", this.rutas[2], "J", "10:30", 400),
-                    new Horario("00004", this.rutas[3], "V", "11:30", 500)
-                ];
-                return horarios;
-            },
-
-            initPromo: function () {
-                var promo = [
-                    new Vuelo("00001", this.horarios[0], "24-04-2017", 50),
-                    new Vuelo("00002", this.horarios[1], "25-04-2017", 50),
-                    new Vuelo("00003", this.horarios[2], "27-04-2017", 50),
-                    new Vuelo("00004", this.horarios[3], "28-04-2017", 50)
-                ];
-                return promo;
-            },
-
-            initVuelos: function () {
-                var vuelos = [
-                    new Vuelo("00001", this.horarios[0], "24-04-2017", 50),
-                    new Vuelo("00002", this.horarios[1], "25-04-2017", 50),
-                    new Vuelo("00003", this.horarios[2], "27-04-2017", 50),
-                    new Vuelo("00004", this.horarios[3], "28-04-2017", 50)
-                ];
-                return vuelos;
-            }
-
+        }
             
         
         
@@ -178,14 +123,18 @@
         AirController: function(model, view){
             this.model=model;
             this.view=view;
+            
+        },
+        llenar: function(){
             Proxy.getCiudades(function(result){
+                console.log('wjkfjwelf');
                 model.ciudades = result;
                 view.fillCombo();
             });
             Proxy.getPromo(function(result){
                 model.promo=result;
-                view.showPromo();
-            })
+                view.showPromos();
+            });
         },
         
         buscar: function(){
@@ -207,23 +156,8 @@
         function pageLoad(event) {
             model = new AirModel();
             controller = new AirController(model, window);
-            showPromos(); //llenar el carousel  
-            new WOW().init();
-            jQuery('.carousel[data-type="multi"] .item').each(function () {
-                var next = jQuery(this).next();
-                if (!next.length) {
-                    next = jQuery(this).siblings(':first');
-                }
-                next.children(':first-child').clone().appendTo(jQuery(this));
-
-                for (var i = 0; i < 2; i++) {
-                    next = next.next();
-                    if (!next.length) {
-                        next = jQuery(this).siblings(':first');
-                    }
-                    next.children(':first-child').clone().appendTo($(this));
-                }
-            });
+            //showPromos(); //llenar el carousel  
+            controller.llenar();
                         
              $('#salida').datepicker({ autoclose: true, language: 'es' });
              $('#salida').datepicker('update', new Date());
@@ -232,7 +166,7 @@
           
            
            fillComboPasajeros();
-           listVuelos(model.buscados);
+           //listVuelos(model.buscados);
            var ida = document.getElementById("soloIda");
            $('input[name="soloIda"]').change(function(){
                 if($(this).is(':checked'))
@@ -257,7 +191,24 @@
             {
                 addCarousel(model.promo[a]);
             }
+            new WOW().init();
+            jQuery('.carousel[data-type="multi"] .item').each(function () {
+                var next = jQuery(this).next();
+                if (!next.length) {
+                    next = jQuery(this).siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo(jQuery(this));
+
+                for (var i = 0; i < 2; i++) {
+                    next = next.next();
+                    if (!next.length) {
+                        next = jQuery(this).siblings(':first');
+                    }
+                    next.children(':first-child').clone().appendTo($(this));
+                }
+            });
         }
+        
         function addCarousel(vuelo) {
             var c = document.getElementById("carousel");
             var item = "";
@@ -357,7 +308,7 @@
                             "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                         }
                     }});
-                return t2;
+                
             }
 	
 	

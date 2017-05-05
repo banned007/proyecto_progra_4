@@ -1,5 +1,9 @@
-package airline.model;
+package airline.service;
 
+import airline.model.AirlineModel;
+import airline.model.Ciudad;
+import airline.model.Jsonable;
+import airline.model.Vuelo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
@@ -22,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Estudiante
  */
-@WebServlet(name = "Aerolina_service", urlPatterns = {"/Aerolinea_service"})
-public class Aerolinea_service extends HttpServlet{
+@WebServlet(name = "AirlineService", urlPatterns = {"/AirlineService"})
+public class AirlineService extends HttpServlet{
     AirlineModel model;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
@@ -31,7 +35,7 @@ public class Aerolinea_service extends HttpServlet{
         try(PrintWriter out = response.getWriter()){
             response.setContentType("text/xml");
             RuntimeTypeAdapterFactory<Jsonable> rta = RuntimeTypeAdapterFactory.of(Jsonable.class,"_class")
-                    .registerSubtype(Ciudad.class,"Ciudad")
+                    .registerSubtype(Ciudad.class,"Ciudad").registerSubtype(Vuelo.class,"Ruta").registerSubtype(Vuelo.class,"Horario")
                     .registerSubtype(Vuelo.class,"Vuelo");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;

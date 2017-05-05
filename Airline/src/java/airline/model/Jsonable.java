@@ -9,6 +9,6 @@ package airline.model;
  *
  * @author kerly
  */
-interface Jsonable {
+public interface Jsonable {
     
 }
