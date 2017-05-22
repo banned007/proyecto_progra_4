@@ -1,40 +1,19 @@
+<%-- 
+    Document   : index
+    Created on : 20-may-2017, 18:27:10
+    Author     : kerly
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
         <title>Aerolineas EXODUS</title>
-
-
-
-        <script type="text/javascript" src="js/Ciudad.js"></script>
-        <script type="text/javascript" src="js/Ruta.js"></script>
-        <script type="text/javascript" src="js/Horario.js"></script>
-        <script type="text/javascript" src="js/Vuelo.js"></script>
-        <script type="text/javascript" src="js/Proxy.js"></script>
-        <script type="text/javascript" src="js/JsonUtils.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Cabin+Sketch|Love+Ya+Like+A+Sister" rel="stylesheet">
-        <link href="css/product-carousel.css" rel="stylesheet">     
-        <link rel="stylesheet" href="css/animate.css">  
-        <script type="text/javascript" src="js/jquery.min.js"></script>   
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-        <script type="text/javascript" src="js/loging_pop.js"></script>
-
-        <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
-        <script src="js/ddmenu.js" type="text/javascript"></script>
-
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.0.2/js/bootstrap-datepicker.min.js"></script>
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.0.2/css/bootstrap-datepicker.min.css">
-</head>
-<body>
-    <a id="ddmenuLink" href="ddmenu-source.html">Menu</a>
-    
-    <div class="container" >
+        <%@ include file="Imports.jspf" %>        
+    </head>
+    <body>
+        <%@ include file="Header.jspf" %>
+        <div class="container" >
     <div class="panel panel-default">
     <div class="panel-body" >
         <br><br>

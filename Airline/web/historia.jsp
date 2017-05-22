@@ -1,20 +1,19 @@
+<%-- 
+    Document   : historia
+    Created on : 20-may-2017, 18:39:37
+    Author     : kerly
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Historia</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch|Love+Ya+Like+A+Sister" rel="stylesheet">
-        <link rel="stylesheet" title="normal" type="text/css" href="css/estilo.css">
-        <script src="js/ddmenu.js" type="text/javascript"></script>
-</head>
-
+    <%@ include file="Imports.jspf" %>        
+    </head>
     <body>
-        <a id="ddmenuLink" href="ddmenu-source.html">Menu</a>
-        <hr>
+        <%@ include file="Header.jspf" %>
         <div class="container">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -47,6 +46,5 @@
                     
             </div>
         </div>
-        
     </body>
 </html>

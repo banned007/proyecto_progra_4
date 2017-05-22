@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="ddmenu">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -10,11 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-        <a class="navbar-brand" href="index.html"><span class="glyphicon glyphicon-plane"></span>&nbsp AerolÃ­neas EXODUS</a>
+        <a class="navbar-brand" href="index.jsp"><span class="glyphicon glyphicon-plane"></span>&nbsp Aerolíneas EXODUS</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.jsp">Inicio</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mi Perfil<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -22,15 +18,13 @@
             <li><a href="#">Historial</a></li>
           </ul>
         </li>
-        <li><a href="historia.html">Acerca de nosotros</a></li>
-        <li><a href="contacto.html">Contactenos</a></li>
+        <li><a href="historia.jsp">Acerca de nosotros</a></li>
+        <li><a href="contacto.jsp">Contactenos</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="sign-up.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#" onclick="popup()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
 </nav>
-</body>
-</html>
