@@ -14,7 +14,7 @@ body {margin:0;
 	height: 100%;
 	width: 100%;
 	overflow-x:hidden;   
-        background-image: url("../img/fondo.jpg");
+        background-image: url("../img/fondo1.jpg");
         background-size: cover;
 }
 
@@ -27,7 +27,7 @@ body {margin:0;
 
 .navbar .navbar-brand {
     font-family: 'Cabin Sketch', cursive;
-    font-size: 2.8vw;
+    font-size: 2.5vw;
     padding-top: 0px;
     color:#1ABC9C;
 }
@@ -44,7 +44,10 @@ body {margin:0;
 
 .panel-body {
     background-color: #C9F1E9;
+    
 }
+
+
 
 #panel2{
 
@@ -70,6 +73,15 @@ body {margin:0;
     font-family: 'Cabin Sketch', cursive;
     font-size: 20px;
     color: #216556;
+}
+
+.titulo3{
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 3vw;
+    text-shadow: 3px 3px 2px black;
+    opacity: 0.8;
+    text-align: center;
+    
 }
 
 .texto{
@@ -113,6 +125,7 @@ text-align : justify;
     float: left;
     margin-right:10px;
     
+    
 }
 
 #formularioDiv{
@@ -135,4 +148,204 @@ label{
 }
 
 
+.imagen-oferta {
 
+        width:500px;
+
+        height:500px;
+
+        position:relative;
+
+}
+
+.buybtn{
+    background-color: black;
+    opacity: 0.5;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.buybtn:hover{
+    opacity: 1;
+}
+
+
+
+html,body{
+    position: relative;
+    height: 100%;
+}
+
+.login-container{
+    position: relative;
+    width: 300px;
+    margin: 80px auto;
+    padding: 20px 40px 40px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+#output{
+    position: absolute;
+    width: 300px;
+    top: -75px;
+    left: 0;
+    color: #fff;
+}
+
+#output.alert-success{
+    background: rgb(25, 204, 25);
+}
+
+#output.alert-danger{
+    background: rgb(228, 105, 105);
+}
+
+
+.login-container::before,.login-container::after{
+    content: "";
+    position: absolute;
+    width: 100%;height: 100%;
+    top: 3.5px;left: 0;
+    background: #fff;
+    z-index: -1;
+    -webkit-transform: rotateZ(4deg);
+    -moz-transform: rotateZ(4deg);
+    -ms-transform: rotateZ(4deg);
+    border: 1px solid #ccc;
+
+}
+
+.login-container::after{
+    top: 5px;
+    z-index: -2;
+    -webkit-transform: rotateZ(-2deg);
+     -moz-transform: rotateZ(-2deg);
+      -ms-transform: rotateZ(-2deg);
+
+}
+
+.avatar{
+    width: 100px;height: 100px;
+    margin: 10px auto 30px;
+    border-radius: 100%;
+    border: 2px solid #aaa;
+    background-size: cover;
+    background-image: url("../img/icon-face.png");
+    
+}
+
+.form-box input{
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    height:40px;
+    border: 1px solid #ccc;;
+    background: #fafafa;
+    transition:0.2s ease-in-out;
+
+}
+
+.form-box input:focus{
+    outline: 0;
+    background: #eee;
+}
+
+.form-box input[type="text"]{
+    border-radius: 5px 5px 0 0;
+    text-transform: lowercase;
+}
+
+.form-box input[type="password"]{
+    border-radius: 0 0 5px 5px;
+    border-top: 0;
+}
+
+.form-box button.login{
+    margin-top:15px;
+    padding: 10px 20px;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    padding-top: 60px;
+}

@@ -23,8 +23,103 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#" onclick="popup()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#" onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
+
+<div id="id01" class="modal">
+<div class="container">
+	<div class="login-container">
+            <div id="output"></div>
+            <div class="avatar"></div>
+            <div class="form-box">
+                <form action="" method="" class="modal-content animate">
+                    <input name="user" type="text" placeholder="username">
+                    <input type="password" placeholder="password">
+                    <button class="btn btn-info btn-block login" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+        
+</div>
+</div>
+
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script> // Model
+  function Model() {
+    this.Model();
+  }
+  
+  Model.prototype={
+	Model: function(){
+        }
+  };
+</script>
+<script> // Controller
+  function Controller(model,view) {
+    this.Controller(model,view);
+  }
+  
+  Controller.prototype={
+	Controller: function(model,view){
+		this.model=model;
+		this.view=view;
+	},
+        login: function(){
+            var view = this.view;
+            usuario = new Usuario(document.getElementById("id").value,document.getElementById("clave").value,0);
+            Proxy.userLogin(usuario,
+                function(usuario){
+                    switch(usuario.tipo){
+                        case 0: // usuario no existe
+                            view.showErrorMessage();
+                            break;
+                        case 1: // cliente
+                            document.location = "/33-CarritoCompra/ListProducts.jsp";
+                            break;
+                        case 2: // manager
+                            document.location = "/33-CarritoCompra/ManagerMenu.jsp";
+                            break;
+                    }
+                });
+        }
+  };
+</script>
+<script> // View
+  var model;
+  var controller;
+	function pageLoad(event){
+		model=new Model();  
+		controller = new Controller(model,window);
+	}
+        function showErrorMessage(){
+            window.alert("Usuario incorrecto...");
+        }
+        
+	document.addEventListener("DOMContentLoaded",pageLoad);
+</script>    
+<script>
+    function logout(){
+           Proxy.userLogout(
+                function(){
+                    sessionStorage.removeItem("Cart");
+                    document.location="/33-CarritoCompra/Login.jsp";
+               });
+    
+}
+</script>

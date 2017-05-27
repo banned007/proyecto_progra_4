@@ -13,15 +13,12 @@
     </head>
     <body>
         <%@ include file="Header.jspf" %>
-        <div class="container" >
+    <div class="container" >
     <div class="panel panel-default">
     <div class="panel-body" >
-        <br><br>
+
         
-        
-        
-        <h1 class="titulo1">Vuelos en descuento</h1>
-            <div class="carousel slide row innerbkground" data-ride="carousel" data-type="multi" data-interval="3000" id="productscarousel">
+            <div class="carousel slide" data-ride="carousel"  data-interval="3000" id="productscarousel">
                 <div class="carousel-inner" id="carousel">
                 </div>
                 <a class="left carousel-control" href="#productscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -31,7 +28,7 @@
         <br><br>
         
         
-        <h1 class="titulo1">Buscador de Vuelos</h1>
+     
 
    
     
@@ -190,27 +187,14 @@
             var item = "";
             item = c.childElementCount == 0 ? "item active" : "item";
             var a = "";
-            a += "<div class=\"col-md-3 col-sm-4 col-xs-12\">";
-
-            a += "<div class=\"spe-prods\">";
-            a += "<div class=\"mainbox\">";
-            a += "<h3>" + vuelo.horario.ruta.origen.nombre + " - " + vuelo.horario.ruta.destino.nombre + "</h3>";//encabezado de producto
+            a += "<div class=\"imagen-oferta\">";
             a += "<img src=\"img/" + vuelo.numero + ".jpg\" alt=\"\">";//link de imagen
             a += "</div>";
-            a += "<div class=\"price-big\">";
-            a += "<div>"
-            a += "<div class=\"floatting-price\">";
-            a += "<h3>$" + vuelo.horario.precio + "</h3>";//precio
+            a += "<div class=\"carousel-caption\">";
+            a += "<h1 class=\"titulo3\">"+vuelo.horario.ruta.origen.nombre + " - " + vuelo.horario.ruta.destino.nombre+"    $"+vuelo.horario.precio+"</h3>";//encabezado de producto
+            a += "<button type=\"submit\" href=\"#\" class=\"buybtn\">Comprar</button>" ;
             a += "</div>";
-            a += "</div>";
-            a += "<div class=\"ordersection\">";
-            a += "<a href=\"#\" class=\"buybtn\">Comprar</a>";
-            a += "</div>";
-            a += "</div>";
-            a += "</div>";
-
-
-            a += "</div>";
+           
             var b = document.createElement("div");
             b.className=item;
             b.innerHTML = a;
@@ -316,3 +300,4 @@
 
 </body>
 </html>
+

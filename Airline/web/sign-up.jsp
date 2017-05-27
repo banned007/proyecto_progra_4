@@ -18,7 +18,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <br><br>
-                    <h1 class="titulo1">Registro a Aerolíneas EXODUS</h1>
+                    <h1 class="titulo3">Registro a Aerolíneas EXODUS</h1>
                     <table class="log">
                         <tbody>
                             <tr class="inn"><td class="texto col-sm-7">Usuario*</td><td><input type="text" id="usuario"></td></tr>
