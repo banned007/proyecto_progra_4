@@ -7,9 +7,11 @@ package airline.service;
 
 import airline.model.AirlineModel;
 import airline.model.Ciudad;
+import airline.model.Cliente;
 import airline.model.Horario;
 import airline.model.Jsonable;
 import airline.model.Ruta;
+import airline.model.Usuario;
 import airline.model.Vuelo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AirlineService", urlPatterns = {"/AirlineService"})
 public class AirlineService extends HttpServlet {
-    AirlineModel model;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,7 +42,7 @@ public class AirlineService extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -49,32 +51,68 @@ public class AirlineService extends HttpServlet {
                     .registerSubtype(Ciudad.class,"Ciudad")
                     .registerSubtype(Ruta.class,"Ruta")
                     .registerSubtype(Horario.class,"Horario")
-                    .registerSubtype(Vuelo.class,"Vuelo");
+                    .registerSubtype(Vuelo.class,"Vuelo")
+                    .registerSubtype(Usuario.class,"Usuario")
+                    .registerSubtype(Cliente.class,"Cliente");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String accion = request.getParameter("action");
             System.out.println(accion);
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
+            Cliente client;
             switch(accion){
                 case "ciudadListAll":
-                    ciudades = model.getCiudades();
+                    ciudades = AirlineModel.getCiudades();
                     json = gson.toJson(ciudades);
                     out.write(json);
                     break;
                 case "vueloListPromo":
-                    vuelos = model.getPromo();
+                    vuelos = AirlineModel.getPromo();
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
                 case "vueloListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    vuelos = model.getVuelos(origen,destino);
+                    vuelos = AirlineModel.getVuelos(origen,destino);
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
+                case "userLogin":
+                    json = request.getParameter("user");
+                    Usuario user= gson.fromJson(json, Usuario.class);
+                    user=AirlineModel.userLogin(user);
+                    if (user.getTipo()!=0){
+                        request.getSession().setAttribute("user", user);
+                        switch(user.getTipo()){
+                            case 1: // client
+                                client = new Cliente("001", "Kerly","Gomez","k.e.r.l.y013@gmail.com","12/09/1998","Heredia","111-1111","7072-4345");
+                                        //AirlineModel.clientGet(user.getId());
+                                request.getSession().setAttribute("client", client);
+                                break;
+                            case 2: // manager
+                                break;
+                        }
+                    }
+                    json = gson.toJson(user); 
+               
+                    out.write(json);
+                    break;
+                case "userLogout":
+                        request.getSession().removeAttribute("user");
+                        request.getSession().invalidate();
+                    break;
+
+                case "clientGet":
+                    client = (Cliente)request.getSession().getAttribute("client");
+                    json = gson.toJson(client); 
+                    out.write(json);
+                    break;
             }
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
     }
 
@@ -104,7 +142,9 @@ public class AirlineService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    
+            processRequest(request, response);
+        
     }
 
     /**
@@ -116,12 +156,12 @@ public class AirlineService extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+    /*
     @Override
     public void init() throws ServletException {
         super.init();
         model = new AirlineModel();
-    }
+    }*/
 }
 
 

@@ -1,11 +1,80 @@
 package airline.model;
 
+import airline.database.Database;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class AirlineModel {
-	public List<Ciudad> getCiudades(){
+    static Database airline;
+    
+    static {
+        initAirline();
+    }
+    private static void initAirline(){
+       airline= new Database(null, null, null);        
+    }
+
+ 
+   public static Usuario userLogin(Usuario usuario) throws Exception{
+        try {
+            String sql="select * from "+
+                    "usuarios  u  "+
+                    "where u.id = '%s' and u.clave='%s'";
+            sql=String.format(sql,usuario.id,usuario.clave);
+            
+            ResultSet rs =  airline.executeQuery(sql);
+            if (rs.next()) {
+                return toUser(rs);
+            }
+            else{
+                return new Usuario(usuario.id,usuario.clave,0);
+            }
+        } catch (SQLException ex) {
+        }
+        return null;
+   }
+ private static Usuario toUser(ResultSet rs) throws Exception{
+        Usuario obj= new Usuario();
+        obj.setId(rs.getString("id"));
+        obj.setClave(rs.getString("clave"));
+        obj.setTipo(rs.getInt("tipo"));
+        return obj;
+    }
+ 
+ public static Cliente clientGet(String id) throws Exception{
+    String sql="select * from "+
+            "Cliente  c  "+
+            "where c.id = '%s'";
+    sql=String.format(sql,id);
+
+    ResultSet rs =  airline.executeQuery(sql);
+    if (rs.next()) {
+        return toClient(rs);
+    }
+    else{
+        throw new Exception("Cliente no existe");
+    }
+}
+ private static Cliente toClient(ResultSet rs) throws Exception{
+        Cliente obj= new Cliente();
+        obj.setId(rs.getString("id"));
+        obj.setNombre(rs.getString("nombre"));
+        obj.setCorreo_electronico(rs.getString("correo_electronico"));
+        obj.setDireccion(rs.getString("direccion"));
+        obj.setTelefono_trabajo(rs.getString("telefono_trabajo"));
+        obj.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
+        obj.setApellido(rs.getString("apellido"));
+        obj.setCelular(rs.getString("celular"));
+        return obj;
+    }
+
+
+
+    public static List<Ciudad> getCiudades(){
 		Ciudad[] ciudades = {
 			new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"),
 			new Ciudad("MIA-", "Miami", "USA", "GMT-4"),
@@ -15,7 +84,7 @@ public class AirlineModel {
 		return  new ArrayList(Arrays.asList(ciudades));
 	}
 	
-	public List<Vuelo> getPromo(){
+	public static List<Vuelo> getPromo(){
 
 		Vuelo[] promos = {
 			new Vuelo("00001", new Horario("00001",new Ruta("00001", new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"), new Ciudad("MIA-", "Miami", "USA", "GMT-4"), 130), "L", "08:30", 200), "24-04-2017", 50),
@@ -26,7 +95,7 @@ public class AirlineModel {
 		return  new ArrayList(Arrays.asList(promos));
 	}
         
-        public List<Vuelo> getVuelos(){
+        public static List<Vuelo> getVuelos(){
                 Vuelo[] vuelos = {
 			new Vuelo("00001", new Horario("00001",new Ruta("00001", new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"), new Ciudad("MIA-", "Miami", "USA", "GMT-4"), 130), "L", "08:30", 200), "24-04-2017", 50),
                         new Vuelo("00002", new Horario("00002",new Ruta("00002", new Ciudad("MIA-", "Miami", "USA", "GMT-4"), new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"), 130), "M", "09:30", 300), "25-04-2017", 50),
@@ -36,9 +105,9 @@ public class AirlineModel {
 		return  new ArrayList(Arrays.asList(vuelos));
         }
         
-        public List<Vuelo> getVuelos(String origen, String destino){
+        public static List<Vuelo> getVuelos(String origen, String destino){
             ArrayList<Vuelo> result = new ArrayList();
-            List<Vuelo> vuelos = this.getVuelos();
+            List<Vuelo> vuelos = AirlineModel.getVuelos();
             
             String or = origen.substring(0, 4);
             if(origen.substring(0, 1).equals("-"))
@@ -54,4 +123,9 @@ public class AirlineModel {
             
             return result;
         }
+   
 }
+
+
+
+	

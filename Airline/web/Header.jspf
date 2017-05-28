@@ -1,3 +1,5 @@
+<%@page import="airline.model.Cliente"%>
+<%@page import="airline.model.Usuario"%>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="ddmenu">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -21,10 +23,45 @@
         <li><a href="historia.jsp">Acerca de nosotros</a></li>
         <li><a href="contacto.jsp">Contactenos</a></li>
       </ul>
+      <% Usuario user = (Usuario) request.getSession().getAttribute("user"); %> 
+      <% if (user==null){%> 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#" onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
+       <%}%> 
+       
+       
+       <%   if (user!=null){%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><span class="glyphicon glyphicon-user"></span><%=user.getId()%></li>
+            
+            <% if(user.getTipo()==1){ // client %>
+                <li><%=( (Cliente) request.getSession().getAttribute("client")).getNombre() %></li>
+                 
+            <%}%>
+            
+            <% if(user.getTipo()==2){ // manager %>
+                <li>
+                        <a href="AdminMenu.jsp" title="Menu" class="btn btn-info btn-lg">
+                                <span class="glyphicon glyphicon-paperclip"></span>
+                        </a>
+                </li>
+            <%}%>   
+            <li>
+            <div id="logout" onclick="logout();return false;" style=""> 
+                    <a href="" title="Logout" class="btn btn-info btn-lg">
+                            <div style="width: 30px; height:30px;  background-image: url(images/logout.png); background-repeat: no-repeat; background-size:contain;"></div>
+                    </a>
+            </div>
+            </li>
+            </ul>
+        <%}%>
+       
+       
+       
+       
+       
     </div>
   </div>
 </nav>
@@ -37,17 +74,15 @@
             <div class="avatar"></div>
             <div class="form-box">
                 <form action="" method="" class="modal-content animate">
-                    <input name="user" type="text" placeholder="username">
-                    <input type="password" placeholder="password">
-                    <button class="btn btn-info btn-block login" type="submit">Login</button>
+                    <input name="user" type="text" placeholder="username" id="id" required="">
+                    <input type="password" placeholder="password" id="clave">
+                    <button class="btn btn-info btn-block login" type="button" onclick="controller.login();">Login</button>
                 </form>
             </div>
         </div>
         
 </div>
 </div>
-
-
 
 <script>
 // Get the modal
@@ -59,67 +94,19 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-</script>
-<script> // Model
-  function Model() {
-    this.Model();
-  }
-  
-  Model.prototype={
-	Model: function(){
-        }
-  };
-</script>
-<script> // Controller
-  function Controller(model,view) {
-    this.Controller(model,view);
-  }
-  
-  Controller.prototype={
-	Controller: function(model,view){
-		this.model=model;
-		this.view=view;
-	},
-        login: function(){
-            var view = this.view;
-            usuario = new Usuario(document.getElementById("id").value,document.getElementById("clave").value,0);
-            Proxy.userLogin(usuario,
-                function(usuario){
-                    switch(usuario.tipo){
-                        case 0: // usuario no existe
-                            view.showErrorMessage();
-                            break;
-                        case 1: // cliente
-                            document.location = "/33-CarritoCompra/ListProducts.jsp";
-                            break;
-                        case 2: // manager
-                            document.location = "/33-CarritoCompra/ManagerMenu.jsp";
-                            break;
-                    }
-                });
-        }
-  };
-</script>
-<script> // View
-  var model;
-  var controller;
-	function pageLoad(event){
-		model=new Model();  
-		controller = new Controller(model,window);
-	}
-        function showErrorMessage(){
-            window.alert("Usuario incorrecto...");
-        }
-        
-	document.addEventListener("DOMContentLoaded",pageLoad);
 </script>    
 <script>
     function logout(){
            Proxy.userLogout(
                 function(){
-                    sessionStorage.removeItem("Cart");
-                    document.location="/33-CarritoCompra/Login.jsp";
+                    document.location="/Airline/index.jsp";
                });
     
 }
 </script>
+
+
+
+
+
+

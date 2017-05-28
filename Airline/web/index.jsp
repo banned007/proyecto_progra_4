@@ -119,6 +119,25 @@
                 model.buscados=result;
                 view.showBuscados();
             });
+        },
+        login: function(){
+            var view = this.view;
+            usuario = new Usuario(document.getElementById("id").value,document.getElementById("clave").value,0);
+            console.log(usuario);
+            Proxy.userLogin(usuario,
+                function(usuario){
+                    switch(usuario.tipo){
+                        case 0: // usuario no existe
+                            view.showErrorMessage();
+                            break;
+                        case 1: // cliente
+                            document.location = "/Airline/index.jsp";
+                            break;
+                        case 2: // manager
+                            document.location = "/Airline/AdminMenu.jsp";
+                            break;
+                    }
+                });
         }
     };
 </script>

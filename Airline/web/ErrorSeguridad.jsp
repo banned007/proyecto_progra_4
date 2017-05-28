@@ -1,6 +1,6 @@
 <%-- 
     Document   : ErrorSeguridad
-    Created on : 27-may-2017, 17:04:03
+    Created on : 27-may-2017, 19:50:57
     Author     : kerly
 --%>
 
@@ -21,22 +21,22 @@
         </div>
 
 <script> // Model
-  function Model() {
-    this.Model();
+  function AirModel() {
+    this.AirModel();
   }
   
-  Model.prototype={
-	Model: function(){
+  AirModel.prototype={
+	AirModel: function(){
         }
   };
 </script>
 <script> // Controller
-  function Controller(model,view) {
-    this.Controller(model,view);
+  function AirController(model,view) {
+    this.AirController(model,view);
   }
   
-  Controller.prototype={
-	Controller: function(model,view){
+  AirController.prototype={
+	AirController: function(model,view){
 		this.model=model;
 		this.view=view;
 	}
@@ -46,8 +46,8 @@
   var model;
   var controller;
 	function pageLoad(event){
-		model=new Model();  
-		controller = new Controller(model,window);
+		model=new AirModel();  
+		controller = new AirController(model,window);
 	}
 	document.addEventListener("DOMContentLoaded",pageLoad);
 </script>          
