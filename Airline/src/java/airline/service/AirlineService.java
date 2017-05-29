@@ -87,8 +87,7 @@ public class AirlineService extends HttpServlet {
                         request.getSession().setAttribute("user", user);
                         switch(user.getTipo()){
                             case 1: // client
-                                client = new Cliente("001", "Kerly","Gomez","k.e.r.l.y013@gmail.com","12/09/1998","Heredia","111-1111","7072-4345");
-                                        //AirlineModel.clientGet(user.getId());
+                                client = AirlineModel.clientGet(user.getId());
                                 request.getSession().setAttribute("client", client);
                                 break;
                             case 2: // manager
@@ -109,6 +108,17 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(client); 
                     out.write(json);
                     break;
+                case "UserAdd":
+                    json = request.getParameter("usuario");
+                    Usuario usuarioAdd= gson.fromJson(json, Usuario.class);
+                    int inserted = AirlineModel.userAdd(usuarioAdd); 
+                    out.write((inserted==1)?"0":"1");
+                    break;
+                case "ClientAdd":
+                    json = request.getParameter("cliente");
+                    Cliente clienteAdd= gson.fromJson(json, Cliente.class);
+                    int inserted2 = AirlineModel.clientAdd(clienteAdd); 
+                    out.write((inserted2==1)?"0":"1");
             }
         }
         catch(Exception e){

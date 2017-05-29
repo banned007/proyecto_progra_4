@@ -1,6 +1,6 @@
 <%-- 
-    Document   : contacto
-    Created on : 20-may-2017, 18:39:26
+    Document   : DatosAgregados
+    Created on : 28-may-2017, 14:41:18
     Author     : kerly
 --%>
 
@@ -18,17 +18,9 @@
     <div class="panel panel-default">
     <div class="panel-body">
         <br><br>
-        <h1 class="titulo1">Contáctenos &nbsp <span class="glyphicon glyphicon-send"></span></h1>
+        <h1 class="titulo1">Usuario Registrado!!! Inicie Sesión!!! &nbsp <span class="glyphicon glyphicon-send"></span></h1>
         <hr>
-        <h2 class="titulo2">
-            <span class="glyphicon glyphicon-phone-alt"></span> &nbsp 7072-4345 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <span class="glyphicon glyphicon-phone"></span> &nbsp +506 7072-4345
-        </h2>
-        <p class="texto">
-            Comuniquese con nosotros. &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Desde fuera del país.
-        </p>
-        <hr>
-        <img class="iconn" src="img/facebook.png"><img class="iconn" src="img/twitter.png"><img class="iconn" src="img/instagram.png">
+
         
     </div>
     </div>
@@ -93,3 +85,4 @@
         document.addEventListener("DOMContentLoaded", pageLoad);
     </script>
 </html>
+

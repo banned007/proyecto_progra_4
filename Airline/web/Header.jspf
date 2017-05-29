@@ -34,16 +34,16 @@
        
        <%   if (user!=null){%>
             <ul class="nav navbar-nav navbar-right">
-                <li><span class="glyphicon glyphicon-user"></span><%=user.getId()%></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span><%=user.getId()%></a></li>
             
             <% if(user.getTipo()==1){ // client %>
-                <li><%=( (Cliente) request.getSession().getAttribute("client")).getNombre() %></li>
+                <li><a href="#"><%=( (Cliente) request.getSession().getAttribute("client")).getNombre() %></a></li>
                  
             <%}%>
             
             <% if(user.getTipo()==2){ // manager %>
                 <li>
-                        <a href="AdminMenu.jsp" title="Menu" class="btn btn-info btn-lg">
+                        <a href="AdminMenu.jsp" title="Menu" class="btn btn-info btn-lg" ">
                                 <span class="glyphicon glyphicon-paperclip"></span>
                         </a>
                 </li>
@@ -51,7 +51,7 @@
             <li>
             <div id="logout" onclick="logout();return false;" style=""> 
                     <a href="" title="Logout" class="btn btn-info btn-lg">
-                            <div style="width: 30px; height:30px;  background-image: url(images/logout.png); background-repeat: no-repeat; background-size:contain;"></div>
+                            <span class="glyphicon glyphicon-log-out"></span>&nbsp Logout
                     </a>
             </div>
             </li>

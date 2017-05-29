@@ -32,9 +32,92 @@
                             <tr class="inn"><td class="texto col-sm-7">Celular*</td><td><input type="text" id="celular"></td>
                         </tbody>
                     </table>
-                    <div class="container text-center"><a href="#" class="buybtn">Registrarse</a></div>
-                </div>
+                    <div class="container text-center"><button class="btn btn-info btn-block login" type="button" onclick="controller.userAdd();">Registrarse</button></div>
+                
+                
             </div>
-        </div>
-    </body>
+        <script>
+        //Modell
+    function AirModel(){
+        this.AirModel();
+    }
+    
+        AirModel.prototype = {
+            AirModel: function () {
+        }
+   
+    };
+    </script>
+    <script>
+//Controller
+    function AirController(model, view){
+        this.AirController(model, view);
+    }
+    
+    AirController.prototype={
+        AirController: function(model, view){
+            this.model=model;
+            this.view=view;
+            
+        },
+        login: function(){
+            var view = this.view;
+            usuario = new Usuario(document.getElementById("id").value,document.getElementById("clave").value,0);
+            console.log(usuario);
+            Proxy.userLogin(usuario,
+                function(usuario){
+                    switch(usuario.tipo){
+                        case 0: // usuario no existe
+                            window.alert("Datos Incorrectos");
+                            
+                            break;
+                        case 1: // cliente
+                            document.location = "/Airline/index.jsp";
+                            break;
+                        case 2: // manager
+                            document.location = "/Airline/AdminMenu.jsp";
+                            break;
+                    }
+                });
+        },
+        
+        userAdd: function(){
+            var view = this.view;
+            var model = this.model;
+            var usuario = new Usuario(document.getElementById("usuario").value, document.getElementById("pass").value, 1);
+            var cliente = new Cliente(document.getElementById("usuario").value, document.getElementById("nombre").value, document.getElementById("apellido").value,document.getElementById("correo").value,document.getElementById("fechaN").value, document.getElementById("direccion").value, document.getElementById("telefono").value, document.getElementById("celular").value );
+                Proxy.userAdd(usuario,
+                    function(status){
+                        switch(status){
+                            case 0:
+                                Proxy.clientAdd(cliente,function(result){
+                                    document.location = "/Airline/DatosAgregados.jsp";
+                                });
+                                
+                                
+                                break;
+                                 
+                            case 1:
+                                window.alert("Registro duplicado");
+                        }
+                    });
+        }
+    };
+    </script>
+    <script>
+//View
+    var model;
+    var controller;
+    
+        function pageLoad(event) {
+            model = new AirModel();
+            controller = new AirController(model, window);
+  
+        }
+        function showErrorMessage(){
+            window.alert("Usuario incorrecto...");
+        }
+        document.addEventListener("DOMContentLoaded", pageLoad);
+    </script>
+
 </html>

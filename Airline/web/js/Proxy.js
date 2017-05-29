@@ -79,3 +79,39 @@ Proxy.userLogout = function(callBack){
     };
     AJAX_req.send();   
 };
+
+Proxy.userAdd = function(usuario,callBack){
+    var jsonUsuario = JSON.stringify(usuario,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    console.log(jsonUsuario); 
+ 
+    url="/Airline/AirlineService?action=UserAdd";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");      
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+            
+                callBack(0);
+            
+        }
+        
+    };
+    AJAX_req.send("usuario="+jsonUsuario); 
+};
+
+Proxy.clientAdd = function(cliente,callBack){
+    var jsonCliente = JSON.stringify(cliente,JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+ 
+    console.log(jsonCliente);
+    url="/Airline/AirlineService?action=ClientAdd";
+    AJAX_req.open( "POST", url, true );
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");      
+    AJAX_req.onreadystatechange = function(){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+                callBack(0);
+        }
+        
+    };
+    AJAX_req.send("cliente="+jsonCliente); 
+};

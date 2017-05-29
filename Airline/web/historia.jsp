@@ -47,4 +47,61 @@
             </div>
         </div>
     </body>
+    <script>
+        //Modell
+    function AirModel(){
+        this.AirModel();
+    }
+    
+        AirModel.prototype = {
+            AirModel: function () {
+        }
+   
+    };
+    </script>
+    <script>
+//Controller
+    function AirController(model, view){
+        this.AirController(model, view);
+    }
+    
+    AirController.prototype={
+        AirController: function(model, view){
+            this.model=model;
+            this.view=view;
+            
+        },
+        login: function(){
+            var view = this.view;
+            usuario = new Usuario(document.getElementById("id").value,document.getElementById("clave").value,0);
+            console.log(usuario);
+            Proxy.userLogin(usuario,
+                function(usuario){
+                    switch(usuario.tipo){
+                        case 0: // usuario no existe
+                            window.alert("Datos Incorrectos");
+                            break;
+                        case 1: // cliente
+                            document.location = "/Airline/index.jsp";
+                            break;
+                        case 2: // manager
+                            document.location = "/Airline/AdminMenu.jsp";
+                            break;
+                    }
+                });
+        }
+    };
+    </script>
+    <script>
+//View
+    var model;
+    var controller;
+    
+        function pageLoad(event) {
+            model = new AirModel();
+            controller = new AirController(model, window);
+  
+        }
+        document.addEventListener("DOMContentLoaded", pageLoad);
+    </script>
 </html>

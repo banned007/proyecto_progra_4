@@ -13,70 +13,64 @@
     </head>
     <body>
         <%@ include file="Header.jspf" %>
-    <div class="container" >
-    <div class="panel panel-default">
-    <div class="panel-body" >
+        <div class="container" >
+            <div class="panel panel-default">
+                <div class="panel-body" >
 
-        
-            <div class="carousel slide" data-ride="carousel"  data-interval="3000" id="productscarousel">
-                <div class="carousel-inner" id="carousel">
-                </div>
-                <a class="left carousel-control" href="#productscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                <a class="right carousel-control" href="#productscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
-            </div>
-        
-        <br><br>
-        
-        
-     
 
-   
-    
-    <div class="panel panel-default" id="panel2" >
-        
-        <div id="formularioDiv" >
-	<form method="POST" name="formulario" id="formulario" action="javascript:doSearch();" >
-            
-                <div class="form-group" style="display: inline-block;"><label>-  Origen -</label><select id="origen" class="form-control" ></select></div>
-                <div class="form-group" style="display: inline-block;"><label>- Destino -</label><select id="destino" class="form-control" ></select></div>
-                <div class="form-group" style="display: inline-block;"><label>-  Salida -</label><div class="input-append date" id="salida"  data-date-format="dd-mm-yyyy">
-                    <input class="span2" size="16" type="text" /> 
-                    <span class="add-on"><i class="icon-th"></i></span>
-                </div></div>
-                <div class="form-group" style="display: inline-block;"><label id="lbllegada">- Llegada -</label><div class="input-append date" id="llegada"  data-date-format="dd-mm-yyyy">
-                    <input class="span2" size="16" type="text" /> 
-                    <span class="add-on"><i class="icon-th"></i></span>
-                </div></div>
-                <div class="form-group" style="display: inline-block;"><label>-Pasajeros-</label><select id="pasajeros" class="form-control" ></select></div>
-                <label>Solo ida</label><input type="checkbox" id="soloIda" name="soloIda" >
-                <input class="btn btn-default" type="submit" value="Buscar">   
-	</form>
-        </div>      
-                     <div class="panel panel-default" id="panel2">
-                        <div id="listadoDiv" style="display: block; vertical-align:top;">
-                            <table class="grid" id="t1">
-                                <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Duración</th><th>Precio</th></thead>
-                                <tbody id="listado"></tbody>
-                            </table>
-
+                    <div class="carousel slide" data-ride="carousel"  data-interval="3000" id="productscarousel">
+                        <div class="carousel-inner" id="carousel">
                         </div>
+                        <a class="left carousel-control" href="#productscarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                        <a class="right carousel-control" href="#productscarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a> 
                     </div>
-            </div>
-            <br><br><br>
 
-</div>
-		
-	
+                    <br><br>
 
 
-       
-    </div>                  
-        
-    </div>
 
-    
-                                             
-<script> //Modell
+
+
+
+                    <div class="panel panel-default" id="panel2" >
+
+                        <div id="formularioDiv" >
+                            <form method="POST" name="formulario" id="formulario" action="javascript:doSearch();" >
+
+                                <div class="form-group" style="display: inline-block;"><label>-  Origen -</label><select id="origen" class="form-control" ></select></div>
+                                <div class="form-group" style="display: inline-block;"><label>- Destino -</label><select id="destino" class="form-control" ></select></div>
+                                <div class="form-group" style="display: inline-block;"><label>-  Salida -</label><div class="input-append date" id="salida"  data-date-format="dd-mm-yyyy">
+                                        <input class="span2" size="16" type="text" /> 
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></div>
+                                <div class="form-group" style="display: inline-block;"><label id="lbllegada">- Llegada -</label><div class="input-append date" id="llegada"  data-date-format="dd-mm-yyyy">
+                                        <input class="span2" size="16" type="text" /> 
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></div>
+                                <div class="form-group" style="display: inline-block;"><label>-Pasajeros-</label><select id="pasajeros" class="form-control" ></select></div>
+                                <label>Solo ida</label><input type="checkbox" id="soloIda" name="soloIda" >
+                                <input class="btn btn-default" type="submit" value="Buscar" >   
+                            </form>
+                        </div> 
+                        
+                        <div class="panel panel-default" id="panel2">
+                            <div id="listadoDiv" style="display: block; vertical-align:top;">
+                                <table class="grid" id="t1">
+                                    <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Duración</th><th>Precio</th></thead>
+                                    <tbody id="listado"></tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <br><br><br>
+
+                </div>
+            </div>                  
+        </div>
+    <script>
+        //Modell
     function AirModel(){
         this.AirModel();
     }
@@ -86,8 +80,9 @@
         }
    
     };
-</script>
-<script> //Controller
+    </script>
+    <script>
+//Controller
     function AirController(model, view){
         this.AirController(model, view);
     }
@@ -128,7 +123,7 @@
                 function(usuario){
                     switch(usuario.tipo){
                         case 0: // usuario no existe
-                            view.showErrorMessage();
+                            window.alert("Datos Incorrectos");
                             break;
                         case 1: // cliente
                             document.location = "/Airline/index.jsp";
@@ -140,8 +135,9 @@
                 });
         }
     };
-</script>
-<script> //View
+    </script>
+    <script>
+//View
     var model;
     var controller;
     
@@ -174,7 +170,9 @@
    
             });
  
-           
+           function showErrorMessage(){
+            window.alert("Usuario incorrecto...");
+        }
   
         }
 
@@ -248,6 +246,7 @@
            controller.buscar();
        }
        function showBuscados(){
+
                listVuelos();
            
        }
@@ -312,11 +311,9 @@
 	
 	listado.appendChild(tr);  
   }
-        
-        document.addEventListener("DOMContentLoaded",pageLoad)
-</script>
+        document.addEventListener("DOMContentLoaded", pageLoad);
+    </script>
 
-
-</body>
+    </body>
 </html>
 

@@ -47,7 +47,7 @@ public class AirlineModel {
  
  public static Cliente clientGet(String id) throws Exception{
     String sql="select * from "+
-            "Cliente  c  "+
+            "clientes  c  "+
             "where c.id = '%s'";
     sql=String.format(sql,id);
 
@@ -123,6 +123,22 @@ public class AirlineModel {
             
             return result;
         }
+
+    public static int userAdd(Usuario usuario) {
+         String sql="insert into usuarios "+
+                    "(id, clave, tipo) "+
+                    "values ('%s','%s',%d)";
+            sql=String.format(sql,usuario.getId(),usuario.getClave(),usuario.getTipo());
+            return airline.executeUpdate(sql);
+    }
+
+    public static int clientAdd(Cliente cliente) {
+         String sql="insert into clientes "+
+                    "(id,nombre,apellido, correo_electronico,fecha_nacimiento,direccion,telefono_trabajo,celular) "+
+                    "values ('%s','%s','%s','%s','%s','%s','%s','%s')";
+            sql=String.format(sql,cliente.getId(),cliente.getNombre(),cliente.getApellido(), cliente.getCorreo_electronico(), cliente.getFecha_nacimiento(), cliente.getDireccion(), cliente.getTelefono_trabajo(), cliente.getCelular());
+            return airline.executeUpdate(sql);
+    }
    
 }
 
