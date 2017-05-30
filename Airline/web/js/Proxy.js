@@ -89,12 +89,10 @@ Proxy.userAdd = function(usuario,callBack){
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");      
     AJAX_req.onreadystatechange = function(){
-        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
-            
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 )
                 callBack(0);
             
-        }
-        
+
     };
     AJAX_req.send("usuario="+jsonUsuario); 
 };
@@ -108,9 +106,9 @@ Proxy.clientAdd = function(cliente,callBack){
     AJAX_req.open( "POST", url, true );
     AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");      
     AJAX_req.onreadystatechange = function(){
-        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 ){
+        if( AJAX_req.readyState === 4 && AJAX_req.status === 200 )
                 callBack(0);
-        }
+        
         
     };
     AJAX_req.send("cliente="+jsonCliente); 

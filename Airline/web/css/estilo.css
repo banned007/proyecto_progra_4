@@ -24,7 +24,7 @@ body {margin:0;
     
 }
 
-
+input.invalid {box-shadow: 0 0 5px 1px red;}
 .navbar .navbar-brand {
     font-family: 'Cabin Sketch', cursive;
     font-size: 2.5vw;
