@@ -12,19 +12,26 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
+      <% Usuario user = (Usuario) request.getSession().getAttribute("user");%> 
         <li><a href="index.jsp">Inicio</a></li>
+        <% if (user!=null){%>
+        <% if(user.getTipo()==1){ // client %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mi Perfil<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Check-In</a></li>
-            <li><a href="#">Historial</a></li>
+            <li><a href="sign-up.jsp">Configuración de la Cuenta</a></li>
+            <li><a href="#">Historial de Compras</a></li>
           </ul>
         </li>
+        <%}%>
+                    
+        <%}%>
         <li><a href="historia.jsp">Acerca de nosotros</a></li>
         <li><a href="contacto.jsp">Contactenos</a></li>
       </ul>
-      <% Usuario user = (Usuario) request.getSession().getAttribute("user"); %> 
+      
       <% if (user==null){%> 
+      
       <ul class="nav navbar-nav navbar-right">
         <li><a href="sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#" onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -33,6 +40,7 @@
        
        
        <%   if (user!=null){%>
+            
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span><%=user.getId()%></a></li>
             

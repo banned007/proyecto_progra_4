@@ -5,19 +5,60 @@
  */
 package airline.model;
 
+import java.time.LocalTime;
+
 /**
  *
  * @author kerly
  */
 public class Ruta implements Jsonable {
 
-    public Ruta(String numero, Ciudad origen, Ciudad destino, float duracion) {
+    public Ruta(int numero, Ciudad origen, Ciudad destino, float duracion) {
         this.numero = numero;
         this.origen = origen;
         this.destino = destino;
         this.duracion = duracion;
     }
-    String numero;
+    
+    public Ruta() {
+        this.numero = 0;
+        this.origen = new Ciudad();
+        this.destino = new Ciudad();
+        this.duracion = 0;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Ciudad getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Ciudad origen) {
+        this.origen = origen;
+    }
+
+    public Ciudad getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Ciudad destino) {
+        this.destino = destino;
+    }
+
+    public float getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(float duracion) {
+        this.duracion = duracion;
+    }
+    int numero;
     Ciudad origen;
     Ciudad destino;
     float duracion;

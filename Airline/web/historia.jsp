@@ -46,7 +46,7 @@
                     
             </div>
         </div>
-    </body>
+
     <script>
         //Modell
     function AirModel(){
@@ -104,4 +104,5 @@
         }
         document.addEventListener("DOMContentLoaded", pageLoad);
     </script>
+    </body>
 </html>
