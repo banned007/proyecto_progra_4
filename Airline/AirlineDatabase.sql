@@ -32,27 +32,32 @@ usuario varchar(12),
 constraint pk_numero_compra primary key(numero_compra),
 constraint fk_usuario foreign key(usuario) references usuarios(usuario)
 );
+*/
+
 
 create table ciudades(
 codigo_ciudad varchar(12) not null,
 nombre_ciudad varchar(20) not null,
 pais varchar(20) not null,
-zona_horarioa integer not null,
 constraint pk_codigo_ciudad primary key(codigo_ciudad)
 );
+
+drop table rutas;
 
 create table rutas(
 numero_ruta integer not null,
 origen varchar(12) not null,
 destino varchar(12) not null,
-duracion time,
+duracion float,
 constraint pk_numero_ruta primary key(numero_ruta),
 constraint fk_origen foreign key(origen) references ciudades(codigo_ciudad),
 constraint fk_destino foreign key(destino) references ciudades(codigo_ciudad),
 constraint not_equals_origen_destino check(origen!=destino)
 );
+/*
 
-create table tipos_aviones(
+
+create table aviones(
 codigo_avion integer not null,
 annio year not null,
 modelo varchar(20) not null,
@@ -62,13 +67,6 @@ cant_filas integer not null,
 cant_asientos_fila integer not null,
 constraint pk_codigo_avion primary key(codigo_avion),
 constraint cant_pasajeros_check check((cant_filas*cant_asientos_fila)=cant_pasajeros)
-);
-
-create table aviones(
-numero_avion integer not null,
-tipo_avion integer not null,
-constraint pk_numero_avion primary key(numero_avion),
-constraint fk_tipo_avion foreign key(tipo_avion) references tipos_aviones(codigo_avion)
 );
 
 create table vuelos(
@@ -121,3 +119,12 @@ insert into usuarios (id,clave,tipo) values ('001','001', 1);
 insert into usuarios (id,clave,tipo) values ('002','002', 2);
 
 insert into clientes (id,nombre,apellido,correo_electronico,fecha_nacimiento,direccion,telefono_trabajo,celular) values ('001', 'Kerly','Gomez','k.e.r.l.y013@gmail.com','12/09/1998','Heredia','111-1111','7072-4345');
+
+
+insert into ciudades values ('MIA', 'Miami', 'Estados Unidos');
+insert into ciudades values ('GYE', 'Guayaquil', 'Ecuador');
+insert into ciudades values ('SJO', 'San Jose', 'Costa Rica');
+insert into ciudades values ('BGA', 'Bogota', 'Colombia');
+
+insert into rutas(numero_ruta, origen, destino, duracion) values (1, 'MIA', 'GYE', 3.30);
+insert into rutas(numero_ruta, origen, destino, duracion) values (2, 'MIA', 'SJO', 1.30);

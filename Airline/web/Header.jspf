@@ -20,7 +20,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mi Perfil<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="sign-up.jsp">Configuración de la Cuenta</a></li>
-            <li><a href="#">Historial de Compras</a></li>
+            <li><a href="HistorialCompras.jsp">Historial de Compras</a></li>
           </ul>
         </li>
         <%}%>

@@ -82,7 +82,7 @@
                                 <div class="input-append date" id="fNac"  data-date-format="dd/mm/yyyy">
                                     <%if(user2==null){
                                         Date fecha = new Date();
-                                        Format formatter = new SimpleDateFormat("dd/mm/yyyy");
+                                        Format formatter = new SimpleDateFormat("dd/MM/yyyy");
                                         String s = formatter.format(fecha);%>
                                         <input class="input-lg" size="16" type="text" id="fechaN" value="<%=s%>" required/>
                                     <%}else{%>
