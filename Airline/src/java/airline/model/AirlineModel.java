@@ -4,7 +4,6 @@ import airline.database.Database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AirlineModel {
@@ -95,7 +94,7 @@ public class AirlineModel {
         obj.setPais(rs.getString("pais"));
         return obj;
     }
-    /*
+    
     public static List<Ruta> getRutas() throws Exception {
         List<Ruta> rutas;
        rutas= new ArrayList();
@@ -109,56 +108,134 @@ public class AirlineModel {
         } catch (SQLException ex) {
         }
        return rutas;
-    }*/
-    /*
+    }
+    
     private static Ruta toRuta(ResultSet rs) throws SQLException, Exception{
         Ruta obj= new Ruta();
         obj.setNumero(rs.getInt("numero_ruta"));
-        obj.setOrigen(toCity(rs.getObject(2, Ciudad.class)));
-        obj.setDestino(toCity(rs.getObject(3, Ciudad.class)));
+        obj.setOrigen(toCity(rs));
+        obj.setDestino(toCity(rs));
         obj.setDuracion(rs.getFloat("duracion"));
         return obj;
-    } */
-	
-	public static List<Vuelo> getPromo(){
-
-		Vuelo[] promos = {
-			new Vuelo("00001", new Horario("00001",new Ruta(00001, new Ciudad("SJO-", "San José", "Costa Rica"), new Ciudad("MIA-", "Miami", "USA"), (float) 1.30), "L", "08:30", 200), "24-04-2017", 50),
-                        new Vuelo("00002", new Horario("00002",new Ruta(00002, new Ciudad("MIA-", "Miami", "USA"), new Ciudad("SJO-", "San José", "Costa Rica"), (float) 1.30), "M", "09:30", 300), "25-04-2017", 50),
-                        new Vuelo("00003", new Horario("00003",new Ruta(00003, new Ciudad("GYA-", "Guayaquil", "Ecuador"), new Ciudad("BTA-", "Bogotá", "Colombia"), (float) 1.30), "J", "10:30", 400), "27-04-2017", 50),
-                        new Vuelo("00004", new Horario("00004",new Ruta(00004, new Ciudad("BTA-", "Bogotá", "Colombia"), new Ciudad("GYA-", "Guayaquil", "Ecuador"), (float) 1.30), "V", "11:30", 500), "28-04-2017", 50)
-		};
-		return  new ArrayList(Arrays.asList(promos));
-	}
-        
-        public static List<Vuelo> getVuelos(){
-                Vuelo[] vuelos = {
-//			new Vuelo("00001", new Horario("00001",new Ruta("00001", new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"), new Ciudad("MIA-", "Miami", "USA", "GMT-4"), 130), "L", "08:30", 200), "24-04-2017", 50),
-//                        new Vuelo("00002", new Horario("00002",new Ruta("00002", new Ciudad("MIA-", "Miami", "USA", "GMT-4"), new Ciudad("SJO-", "San José", "Costa Rica", "GMT-6"), 130), "M", "09:30", 300), "25-04-2017", 50),
-//                        new Vuelo("00003", new Horario("00003",new Ruta("00003", new Ciudad("GYA-", "Guayaquil", "Ecuador", "GMT-5"), new Ciudad("BTA-", "Bogotá", "Colombia", "UTC-5"), 130), "J", "10:30", 400), "27-04-2017", 50),
-//                        new Vuelo("00004", new Horario("00004",new Ruta("00004", new Ciudad("BTA-", "Bogotá", "Colombia", "UTC-5"), new Ciudad("GYA-", "Guayaquil", "Ecuador", "GMT-5"), 130), "V", "11:30", 500), "28-04-2017", 50)
-		};
-		return  new ArrayList(Arrays.asList(vuelos));
-        }
-        
-        public static List<Vuelo> getVuelos(String origen, String destino){
-            ArrayList<Vuelo> result = new ArrayList();
-            List<Vuelo> vuelos = AirlineModel.getVuelos();
-            
-            String or = origen.substring(0, 4);
-            if(origen.substring(0, 1).equals("-"))
-                or = "";
-           
-            String dest="";
-            if(origen.length()>12)
-                 dest = origen.substring(12);
-            for(Vuelo v: vuelos){
-                if(v.horario.ruta.origen.codigo.contains(or) && v.horario.ruta.destino.codigo.contains(dest)) 
-                    result.add(v);
+    }
+    
+    public static List<Vuelo> getVuelos() throws Exception {
+        List<Vuelo> vuelos;
+       vuelos= new ArrayList();
+        try {
+            String sql="select * from "+
+                    "vuelos";
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                vuelos.add(toVuelo(rs));
             }
-            
-            return result;
+        } catch (SQLException ex) {
         }
+       return vuelos;
+    }
+    
+    private static Vuelo toVuelo(ResultSet rs) throws SQLException, Exception{
+        Vuelo obj= new Vuelo();
+        System.out.print(rs.getInt(1));
+        System.out.print(rs.getString(2));
+        System.out.print(rs.getString(3));
+        System.out.print(rs.getFloat(4));
+        System.out.print(toRuta(rs));
+        System.out.println(rs.getInt("numero_vuelo"));
+        obj.setNumero_vuelo(rs.getInt(1));
+        obj.setDia(rs.getString("dia"));
+        obj.setHora(rs.getString("hora"));
+        obj.setPrecio(rs.getFloat("precio"));
+        obj.setRuta(null);
+        obj.setAvion(null);
+        return obj;
+    }
+    
+    private static Vuelo toVuelo(int n) throws SQLException, Exception{
+        Vuelo obj= new Vuelo();
+        String sql="select * from "+
+                    "vuelos where numero_vuelo="+n;
+        ResultSet rs =  airline.executeQuery(sql);
+        obj.setNumero_vuelo(rs.getInt(1));
+        obj.setDia(rs.getString(2));
+        obj.setHora(rs.getString(3));
+        obj.setPrecio(rs.getFloat(4));
+        obj.setRuta(null);
+        obj.setAvion(null);
+        return obj;
+    }
+    
+   /* public static List<Viaje> getViajes() throws Exception {
+        List<Viaje> viajes;
+        viajes= new ArrayList();
+        try {
+            String sql="select * from "+
+                    "viajes";
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                viajes.add(toViaje(rs));
+            }
+        } catch (SQLException ex) {
+        }
+       return viajes;
+    }*/
+    
+    
+    public static List<Viaje> getPromo() throws Exception {
+        List<Viaje> viajes;
+        viajes= new ArrayList();
+        try {
+            String sql="select * from viajes";
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                viajes.add(toViaje(rs));
+            }
+        } catch (SQLException ex) {
+            System.err.print(ex);
+        }
+       return viajes;
+    }
+    
+    private static Viaje toViaje(ResultSet rs) throws SQLException, Exception{
+        Viaje obj= new Viaje();
+        obj.setNumero_viaje(rs.getInt(1));
+        obj.setVuelo(toVuelo(rs.getInt(2)));
+        obj.setDia_especifico(rs.getDate(3));
+        obj.setAsientos_disponibles(rs.getInt(4));
+        obj.setPromocion(rs.getInt(5));
+        return obj;
+    }
+    
+    public static List<Avion> getAviones() throws Exception {
+        List<Avion> aviones;
+        aviones= new ArrayList();
+        try {
+            String sql="select * from "+
+                    "aviones";
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                aviones.add(toAvion(rs));
+            }
+        } catch (SQLException ex) {
+        }
+       return aviones;
+    }
+    
+    private static Avion toAvion(ResultSet rs) throws SQLException, Exception{
+        Avion obj= new Avion();
+        obj.setCodigo_avion(rs.getInt("codigo_avion"));
+        obj.setAnnio(rs.getString("annio"));
+        obj.setModelo(rs.getString("modelo"));
+        obj.setMarca(rs.getString("marca"));
+        obj.setCant_pasajeros(rs.getInt("cant_pasajeros"));
+        obj.setCant_filas(rs.getInt("cant_filas"));
+        obj.setCant_asientos_fila(rs.getInt("cant_asientos_fila"));
+        return obj;
+    }
+	
+
+        
+        
 
     public static int userAdd(Usuario usuario) {
          String sql="insert into usuarios "+

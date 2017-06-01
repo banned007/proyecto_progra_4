@@ -20,6 +20,15 @@
         <br><br>
         <h1 class="titulo1">Historial de Compras &nbsp <span class="glyphicon glyphicon-shopping-cart"></span></h1>
         <hr>
+        <div class="panel panel-default" id="panel2">
+                            <div id="listadoDiv" style="display: block; vertical-align:top;">
+                                <table class="grid" id="t1">
+                                    <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Duración</th><th>Precio</th></thead>
+                                    <tbody id="listado"></tbody>
+                                </table>
+
+                            </div>
+        </div>
 
         
     </div>
@@ -62,7 +71,7 @@
                             window.alert("Datos Incorrectos");
                             break;
                         case 1: // cliente
-                            document.location = "/Airline/index.jsp";
+                            document.location = "/Airline/HistorialCompras.jsp";
                             break;
                         case 2: // manager
                             document.location = "/Airline/AdminMenu.jsp";

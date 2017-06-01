@@ -170,16 +170,16 @@
 
             }
 
-            function addCarousel(vuelo) {
+            function addCarousel(viaje) {
                 var c = document.getElementById("carousel");
                 var item = "";
                 item = c.childElementCount == 0 ? "item active" : "item";
                 var a = "";
                 a += "<div class=\"imagen-ofertaD\">";
-                a += "<img src=\"img/" + vuelo.numero + ".jpg\" alt=\"\" class=\"imagen-ofertaI\" >";//link de imagen
+                a += "<img src=\"img/" + viaje.vuelo.ruta.numero + ".jpg\" alt=\"\" class=\"imagen-ofertaI\" >";//link de imagen
                 a += "</div>";
                 a += "<div class=\"carousel-caption\">";
-                a += "<h1 class=\"titulo3\">" + vuelo.horario.ruta.origen.nombre + " - " + vuelo.horario.ruta.destino.nombre + "    $" + vuelo.horario.precio + "</h3>";//encabezado de producto
+                a += "<h1 class=\"titulo3\">" + viaje.vuelo.ruta.origen.nombre + " - " + viaje.vuelo.ruta.destino.nombre + "    $" + viaje.vuelo.precio + "</h3>";//encabezado de producto
                 a += "<button type=\"submit\" href=\"#\" class=\"buybtn\">Comprar</button>";
                 a += "</div>";
 

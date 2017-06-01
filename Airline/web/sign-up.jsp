@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign Up</title>
         <%@ include file="Imports.jspf" %> 
-
+        
 
 
     </head>
@@ -219,7 +219,7 @@
 
                                                 break;
                                             case 1: // cliente
-                                                document.location = "/Airline/index.jsp";
+                                                document.location = "/Airline/sign-up.jsp";
                                                 break;
                                             case 2: // manager
                                                 document.location = "/Airline/AdminMenu.jsp";

@@ -7,12 +7,16 @@ JsonUtils.revive = function (k, v){
 	if(v instanceof Object && v._class == 'Ruta'){
 		return new Ruta(v.numero, v.origen, v.destino, v.duracion);
 	}
-	if(v instanceof Object && v._class == 'Horario'){
-		return new Horario(v.numero, v.ruta, v.dia, v.hora, v.precio);
-	}
 	if(v instanceof Object && v._class == 'Vuelo'){
-		return new Vuelo(v.numero, v.horario, v.dia, v.asientosDisp);
+		return new Vuelo(v.numero_vuelo, v.dia, v.hora, v.precio, v.ruta, v.avion);
 	}
+        if(v instanceof Object && v._class == 'Viaje'){
+		return new Viaje(v.numero_viaje, v.vuelo, v.dia_especifico, v.asientos_disponibles, v.promocion);
+	}
+        if(v instanceof Object && v._class == 'Avion'){
+		return new Avion(v.codigo_avion, v.annio, v.modelo, v.marca, v.cant_pasajeros, v.cant_filas, v.cant_asientos_fila);
+	}
+        
         if (v instanceof Object && v._class == 'Usuario') {
 		return new Usuario(v.id,v.clave,v.tipo);
 	}    
@@ -29,8 +33,8 @@ JsonUtils.replacer = function (k, v){
 	if (v instanceof Ruta){
 		v._class="Ruta";
 	}
-	if (v instanceof Horario){
-		v._class="Horario";
+	if (v instanceof Viaje){
+		v._class="Viaje";
 	}
         if (v instanceof Vuelo){
 		v._class="Vuelo";
@@ -40,6 +44,9 @@ JsonUtils.replacer = function (k, v){
 	}
 	if (v instanceof Cliente) {
 		v._class = "Cliente";
+	}
+        if (v instanceof Avion) {
+		v._class = "Avion";
 	}
 	return v;
 }
