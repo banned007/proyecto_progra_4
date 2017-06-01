@@ -54,12 +54,12 @@ constraint fk_origen foreign key(origen) references ciudades(codigo_ciudad),
 constraint fk_destino foreign key(destino) references ciudades(codigo_ciudad),
 constraint not_equals_origen_destino check(origen!=destino)
 );
-/*
+
 
 
 create table aviones(
 codigo_avion integer not null,
-annio year not null,
+annio varchar(10) not null,
 modelo varchar(20) not null,
 marca varchar(20) not null,
 cant_pasajeros integer not null,
@@ -68,6 +68,9 @@ cant_asientos_fila integer not null,
 constraint pk_codigo_avion primary key(codigo_avion),
 constraint cant_pasajeros_check check((cant_filas*cant_asientos_fila)=cant_pasajeros)
 );
+
+
+
 
 create table vuelos(
 numero_vuelo integer not null,
@@ -78,21 +81,25 @@ ruta integer not null,
 avion integer not null,
 constraint pk_numero_vuelo primary key(numero_vuelo),
 constraint fk_ruta foreign key(ruta) references rutas(numero_ruta),
-constraint fk_avion foreign key(avion) references aviones(numero_avion)
+constraint fk_avion foreign key(avion) references aviones(codigo_avion)
 );
 
 
 
 
 create table viajes(
-numero_viaje integer not null auto_increment,
+numero_viaje integer not null,
 vuelo integer not null,
 dia_especifico date not null,
 asientos_disponibles integer not null,
+promocion varchar(1) not  null,
 constraint pk_numero_viaje primary key(numero_viaje),
 constraint fk_vuelo foreign key(vuelo) references vuelos(numero_vuelo)
 );
 
+
+
+/*
 create table tiquetes(
 numero_tiquete integer not null auto_increment,
 datos_persona varchar(200) not null,
@@ -111,8 +118,8 @@ constraint pk_tiquete_avion primary key(tiquete, avion),
 constraint fk_tiquete_1 foreign key(tiquete) references tiquetes(numero_tiquete),
 constraint fk_avion_2 foreign key(avion) references aviones(numero_avion)
 );
-
 */
+
 
 
 insert into usuarios (id,clave,tipo) values ('001','001', 1);
@@ -128,3 +135,18 @@ insert into ciudades values ('BGA', 'Bogota', 'Colombia');
 
 insert into rutas(numero_ruta, origen, destino, duracion) values (1, 'MIA', 'GYE', 3.30);
 insert into rutas(numero_ruta, origen, destino, duracion) values (2, 'MIA', 'SJO', 1.30);
+insert into rutas(numero_ruta, origen, destino, duracion) values (3, 'SJO', 'GYE', 2.30);
+insert into rutas(numero_ruta, origen, destino, duracion) values (4, 'BGA', 'SJO', 4.30);
+
+insert into aviones values(1, '2012', 'AAA', 'BBB', 30, 2, 15);
+
+insert into vuelos values (1, 'L', '2:30', 120, 1, 1);
+insert into vuelos values (2, 'M', '3:30', 130, 2, 1);
+insert into vuelos values (3, 'J', '4:30', 140, 3, 1);
+insert into vuelos values (4, 'V', '5:30', 150, 4, 1);
+
+insert into viajes values (1, 1, '2017/05/05', 30, 1);
+insert into viajes values (2, 2, '2017/05/06', 30, 1);
+insert into viajes values (3, 3, '2017/05/08', 30, 1);
+insert into viajes values (4, 4, '2017/05/09', 30, 1);
+

@@ -6,12 +6,14 @@
 package airline.service;
 
 import airline.model.AirlineModel;
+import airline.model.Avion;
 import airline.model.Ciudad;
 import airline.model.Cliente;
 import airline.model.Horario;
 import airline.model.Jsonable;
 import airline.model.Ruta;
 import airline.model.Usuario;
+import airline.model.Viaje;
 import airline.model.Vuelo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,16 +52,18 @@ public class AirlineService extends HttpServlet {
             RuntimeTypeAdapterFactory<Jsonable> rta = RuntimeTypeAdapterFactory.of(Jsonable.class,"_class")
                     .registerSubtype(Ciudad.class,"Ciudad")
                     .registerSubtype(Ruta.class,"Ruta")
-                    .registerSubtype(Horario.class,"Horario")
                     .registerSubtype(Vuelo.class,"Vuelo")
                     .registerSubtype(Usuario.class,"Usuario")
-                    .registerSubtype(Cliente.class,"Cliente");
+                    .registerSubtype(Cliente.class,"Cliente")
+                    .registerSubtype(Viaje.class,"Viaje")
+                    .registerSubtype(Avion.class,"Avion");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String accion = request.getParameter("action");
             System.out.println(accion);
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
+            List<Viaje> viajes;
             Cliente client;
             switch(accion){
                 case "ciudadListAll":
@@ -67,17 +71,18 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(ciudades);
                     out.write(json);
                     break;
-                case "vueloListPromo":
-                    vuelos = AirlineModel.getPromo();
-                    json = gson.toJson(vuelos);
+                case "viajeListPromo":
+                    viajes = AirlineModel.getPromo();
+                    json = gson.toJson(viajes);
                     out.write(json);
+                        
                     break;
                 case "vueloListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    vuelos = AirlineModel.getVuelos(origen,destino);
-                    json = gson.toJson(vuelos);
-                    out.write(json);
+                    //vuelos = AirlineModel.getVuelos(origen,destino);
+                    //json = gson.toJson(vuelos);
+                    //out.write(json);
                     break;
                 case "userLogin":
                     json = request.getParameter("user");

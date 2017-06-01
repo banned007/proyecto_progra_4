@@ -82,7 +82,7 @@
                             window.alert("Datos Incorrectos");
                             break;
                         case 1: // cliente
-                            document.location = "/Airline/index.jsp";
+                            document.location = "/Airline/historia.jsp";
                             break;
                         case 2: // manager
                             document.location = "/Airline/AdminMenu.jsp";

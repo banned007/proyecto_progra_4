@@ -5,19 +5,19 @@
  */
 
 
-function Avion(numero, annio, modelo, marca, cantPasajeros, cantFilas, cantAscFilas){
-    this.Avion(numero, annio, modelo, marca, cantPasajeros, cantFilas, cantAscFilas);
+function Avion(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila){
+    this.Avion(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila);
 }
 
 Avion.prototype={
-    Vuelo: function(numero, annio, modelo, marca, cantPasajeros, cantFilas, cantAscFilas){
-        this.numero=numero;
+    Vuelo: function(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila){
+        this.codigo_avion=codigo_avion;
         this.annio=annio;
         this.modelo=modelo;
         this.marca=marca;
-        this.cantPasajeros=cantPasajeros;
-        this.cantFilas=cantFilas;
-        this.cantAscFilas=cantAscFilas;
+        this.cant_pasajeros=cant_pasajeros;
+        this.cant_filas=cant_filas;
+        this.cant_asientos_fila=cant_asientos_fila;
     }
 };
 

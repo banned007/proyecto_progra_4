@@ -22,7 +22,7 @@ Proxy.getCiudades = function(callBack){
 
 Proxy.getPromo = function(callBack){
 	var AJAX_req = new XMLHttpRequest();
-	url = "/Airline/AirlineService?action=vueloListPromo";
+	url = "/Airline/AirlineService?action=viajeListPromo";
 	AJAX_req.open("GET", url, true);
 	AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	AJAX_req.onreadystatechange = function(){
