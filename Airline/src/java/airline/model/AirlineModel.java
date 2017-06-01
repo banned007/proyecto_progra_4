@@ -136,41 +136,20 @@ public class AirlineModel {
     
     private static Vuelo toVuelo(ResultSet rs) throws SQLException, Exception{
         Vuelo obj= new Vuelo();
+        System.out.print(rs.getInt(1));
+        System.out.print(rs.getString(2));
+        System.out.print(rs.getString(3));
+        System.out.print(rs.getFloat(4));
+        System.out.print(toRuta(rs));
         System.out.println(rs.getInt("numero_vuelo"));
         obj.setNumero_vuelo(rs.getInt(1));
         obj.setDia(rs.getString("dia"));
         obj.setHora(rs.getString("hora"));
         obj.setPrecio(rs.getFloat("precio"));
-
-
-       //ResultSet rs2 =  airline.executeQuery(sql);
-        obj.setRuta(null);
-        obj.setAvion(null);
+        obj.setRuta(toRuta(rs));
+        obj.setAvion(toAvion(rs));
         return obj;
     }
-    
-    
-    private static Vuelo toVuelo(int n) throws SQLException, Exception{
-        Vuelo obj= new Vuelo();
-        String sql="select * from "+
-                    "vuelos where numero_vuelo="+n;
-        
-            ResultSet rs =  airline.executeQuery(sql);
-        System.out.println(rs.getInt("numero_vuelo"));
-        obj.setNumero_vuelo(rs.getInt(1));
-        obj.setDia(rs.getString("dia"));
-        obj.setHora(rs.getString("hora"));
-        obj.setPrecio(rs.getFloat("precio"));
-        
-
-       ResultSet rs2 =  airline.executeQuery(sql);
-        obj.setRuta(null);
-        obj.setAvion(null);
-        return obj;
-    }
-    
-    
-    
     
     public static List<Viaje> getViajes() throws Exception {
         List<Viaje> viajes;
@@ -190,7 +169,8 @@ public class AirlineModel {
         List<Viaje> viajes;
         viajes= new ArrayList();
         try {
-            String sql="select * from viajes v ";
+            String sql="select * from viajes v "
+                    + "inner join vuelos vu on v.vuelo=vu.numero_vuelo";
             ResultSet rs =  airline.executeQuery(sql);
             System.out.print(rs);
             System.out.println("uuu");
@@ -206,7 +186,7 @@ public class AirlineModel {
     private static Viaje toViaje(ResultSet rs) throws SQLException, Exception{
         Viaje obj= new Viaje();
         obj.setNumero_viaje(rs.getInt("numero_viaje"));
-        obj.setVuelo(toVuelo(rs.getInt(2)));
+        obj.setVuelo(toVuelo(rs));
         obj.setDia_especifico(rs.getDate("dia_especifico"));
         obj.setAsientos_disponibles(rs.getInt("asientos_disponibles"));
         obj.setPromocion(rs.getInt("promocion"));
