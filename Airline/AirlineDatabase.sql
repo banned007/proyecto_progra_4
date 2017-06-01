@@ -42,7 +42,7 @@ pais varchar(20) not null,
 constraint pk_codigo_ciudad primary key(codigo_ciudad)
 );
 
-drop table rutas;
+
 
 create table rutas(
 numero_ruta integer not null,
@@ -74,7 +74,7 @@ constraint cant_pasajeros_check check((cant_filas*cant_asientos_fila)=cant_pasaj
 
 create table vuelos(
 numero_vuelo integer not null,
-dia varchar(1) not null,
+dia varchar(10) not null,
 hora time not null,
 precio float not null,
 ruta integer not null,

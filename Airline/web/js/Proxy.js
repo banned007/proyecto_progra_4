@@ -35,9 +35,9 @@ Proxy.getPromo = function(callBack){
 	AJAX_req.send();
 };
 
-Proxy.vuelosSearch = function(origen, destino, callBack){
+Proxy.viajesSearch = function(origen, destino, fecha, callBack){
 	var AJAX_req = new XMLHttpRequest();
-	url = "/Airline/AirlineService?action=vueloListSearch";
+	url = "/Airline/AirlineService?action=viajeListSearch";
 	AJAX_req.open("POST", url, true);
 	AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	AJAX_req.onreadystatechange = function(){
@@ -47,7 +47,7 @@ Proxy.vuelosSearch = function(origen, destino, callBack){
 			callBack(object);
 		}
 	}
-	AJAX_req.send("origen="+origen+"destino="+destino);
+	AJAX_req.send("origen="+origen+"&destino="+destino+"&fecha="+fecha);
 };
 
 

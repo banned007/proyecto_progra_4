@@ -77,12 +77,13 @@ public class AirlineService extends HttpServlet {
                     out.write(json);
                         
                     break;
-                case "vueloListSearch":
+                case "viajeListSearch":
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    //vuelos = AirlineModel.getVuelos(origen,destino);
-                    //json = gson.toJson(vuelos);
-                    //out.write(json);
+                    String fecha= request.getParameter("fecha");
+                    viajes = AirlineModel.getBusquedaViajes(origen,destino, fecha);
+                    json = gson.toJson(viajes);
+                    out.write(json);
                     break;
                 case "userLogin":
                     json = request.getParameter("user");

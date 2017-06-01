@@ -30,12 +30,12 @@
                         <form method="POST" name="formulario" id="formulario" action="javascript:doSearch();" >
                             <div class="form-group" style="display: inline-block;"><label>-  Origen -</label><select id="origen" class="form-control" ></select></div>
                             <div class="form-group" style="display: inline-block;"><label>- Destino -</label><select id="destino" class="form-control" ></select></div>
-                            <div class="form-group" style="display: inline-block;"><label>-  Salida -</label><div class="input-append date" id="salida"  data-date-format="dd-mm-yyyy">
-                                    <input class="span2" size="16" type="text" />
+                            <div class="form-group" style="display: inline-block;"><label>-  Salida -</label><div class="input-append date" id="salida"  data-date-format="yyyy/mm/dd">
+                                    <input class="span2" size="16" type="text" id="salida_input" />
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div></div>
                             <div class="form-group" style="display: inline-block;"><label id="lbllegada">- Llegada -</label>
-                                <div class="input-append date" id="llegada"  data-date-format="dd-mm-yyyy">
+                                <div class="input-append date" id="llegada"  data-date-format="yyyy/mm/dd">
                                     <input class="span2" size="16" type="text" /> 
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div></div>
@@ -94,13 +94,17 @@
 
                 },
 
-                buscar: function () {
+                buscarIda: function () {
                     var origen = this.view.$("#origen").val();
                     var destino = this.view.$("#destino").val();
+                    var fecha = this.view.$("#salida_input").val();
+                    console.log(origen);
+                    console.log(destino);
+                    console.log(fecha);
                     var model = this.model;
                     var view = this.view;
-                    Proxy.vuelosSearch(origen, destino, function (result) {
-                        model.buscados = result;
+                    Proxy.viajesSearch(origen, destino, fecha, function (result) {
+                        model.buscadosIda = result;
                         view.showBuscados();
                     });
                 },
@@ -161,6 +165,8 @@
 
 
             }
+            
+
 
             function showPromos() {
                 for (var a = 0; a < model.promo.length; a++)
@@ -215,19 +221,19 @@
                 }
             }
             function doSearch() {
-                controller.buscar();
+                controller.buscarIda();
             }
             function showBuscados() {
-                listVuelos();
+                listViajes();
 
             }
 
-            function listVuelos() {
+            function listViajes() {
                 table.destroy();
                 var listado = document.getElementById("listado");
                 listado.innerHTML = "";
-                for (i = 0; i < model.buscados.length; i++) {
-                    listVuelo(listado, model.buscados[i]);
+                for (i = 0; i < model.buscadosIda.length; i++) {
+                    listViaje(listado, model.buscadosIda[i]);
                 }
                 table = paginacion();
             }
@@ -236,7 +242,7 @@
             function paginacion() {
                 return $('#t1').DataTable({"language": {"sProcessing": "Procesando...",
                         "sLengthMenu": "Mostrar _MENU_ boletos",
-                        "sZeroRecords": "No se encontraron vuelos",
+                        "sZeroRecords": "No se encontraron viajes",
                         "sEmptyTable": "No hay vuelos disponibles",
                         "sInfo": "Mostrando boletos del _START_ al _END_ de un total de _TOTAL_ boletos",
                         "sInfoEmpty": "Mostrando boletos del 0 al 0 de un total de 0 boletos",
@@ -261,23 +267,23 @@
             }
 
 
-            function listVuelo(listado, vuelo) {
+            function listViaje(listado, viaje) {
                 var tr = document.createElement("tr");
                 var td;
                 td = document.createElement("td");
-                td.appendChild(document.createTextNode(vuelo.numero));
+                td.appendChild(document.createTextNode(viaje.numero_viaje));
                 tr.appendChild(td);
                 td = document.createElement("td");
-                td.appendChild(document.createTextNode(vuelo.horario.ruta.origen.nombre));
+                td.appendChild(document.createTextNode(viaje.vuelo.ruta.origen.nombre));
                 tr.appendChild(td);
                 td = document.createElement("td");
-                td.appendChild(document.createTextNode(vuelo.horario.ruta.destino.nombre));
+                td.appendChild(document.createTextNode(viaje.vuelo.ruta.destino.nombre));
                 tr.appendChild(td);
                 td = document.createElement("td");
-                td.appendChild(document.createTextNode(vuelo.horario.ruta.duracion));
+                td.appendChild(document.createTextNode(viaje.vuelo.ruta.duracion));
                 tr.appendChild(td);
                 td = document.createElement("td");
-                td.appendChild(document.createTextNode(vuelo.horario.precio));
+                td.appendChild(document.createTextNode(viaje.vuelo.precio));
                 tr.appendChild(td);
 
                 listado.appendChild(tr);

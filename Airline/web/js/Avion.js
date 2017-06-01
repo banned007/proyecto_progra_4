@@ -10,7 +10,7 @@ function Avion(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, c
 }
 
 Avion.prototype={
-    Vuelo: function(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila){
+    Avion: function(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila){
         this.codigo_avion=codigo_avion;
         this.annio=annio;
         this.modelo=modelo;

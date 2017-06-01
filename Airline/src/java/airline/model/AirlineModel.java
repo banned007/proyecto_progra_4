@@ -95,6 +95,15 @@ public class AirlineModel {
         return obj;
     }
     
+    private static Ciudad toOrigen(ResultSet rs) throws Exception{
+        Ciudad obj= new Ciudad();
+        obj.setCodigo(rs.getString("codigo_ciudad_origen"));
+        obj.setNombre(rs.getString("nombre_ciudad_origen"));
+        obj.setPais(rs.getString("pais_origen"));
+        return obj;
+    }
+    
+    
     public static List<Ruta> getRutas() throws Exception {
         List<Ruta> rutas;
        rutas= new ArrayList();
@@ -113,7 +122,7 @@ public class AirlineModel {
     private static Ruta toRuta(ResultSet rs) throws SQLException, Exception{
         Ruta obj= new Ruta();
         obj.setNumero(rs.getInt("numero_ruta"));
-        obj.setOrigen(toCity(rs));
+        obj.setOrigen(toOrigen(rs));
         obj.setDestino(toCity(rs));
         obj.setDuracion(rs.getFloat("duracion"));
         return obj;
@@ -169,11 +178,39 @@ public class AirlineModel {
         List<Viaje> viajes;
         viajes= new ArrayList();
         try {
-            String sql="select * from viajes v "
-                    + "inner join vuelos vu on v.vuelo=vu.numero_vuelo";
+            String sql="select numero_viaje, vuelo, dia_especifico, asientos_disponibles, promocion, numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from viajes, vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where viajes.vuelo=vuelos.numero_vuelo\n" +
+"                    and vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad\n" +
+"                    and promocion=1";           
             ResultSet rs =  airline.executeQuery(sql);
-            System.out.print(rs);
-            System.out.println("uuu");
+            while (rs.next()) {
+                viajes.add(toViaje(rs));
+            }
+        } catch (SQLException ex) {
+            System.err.print(ex);
+        }
+       return viajes;
+    }
+    
+    public static List<Viaje> getBusquedaViajes(String origen, String destino, String fecha) throws Exception {
+        List<Viaje> viajes;
+        viajes= new ArrayList();
+        try {
+            String sql="select numero_viaje, vuelo, dia_especifico, asientos_disponibles, promocion, numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from viajes, vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where viajes.vuelo=vuelos.numero_vuelo\n" +
+"                    and vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad\n" +
+"                    and origen='%s'\n" +
+"                    and destino='%s'\n"+ 
+                    "and dia_especifico='%s'";  
+            System.out.println(sql);
+            sql=String.format(sql, origen, destino, fecha);
+            ResultSet rs =  airline.executeQuery(sql);
             while (rs.next()) {
                 viajes.add(toViaje(rs));
             }
