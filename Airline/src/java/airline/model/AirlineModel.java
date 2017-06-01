@@ -153,15 +153,53 @@ public class AirlineModel {
     
     private static Vuelo toVuelo(int n) throws SQLException, Exception{
         Vuelo obj= new Vuelo();
-        String sql="select * from "+
-                    "vuelos where numero_vuelo="+n;
+        String sql="select * from vuelos where numero_vuelo="+Integer.toString(n);
         ResultSet rs =  airline.executeQuery(sql);
+        rs.next();
         obj.setNumero_vuelo(rs.getInt(1));
         obj.setDia(rs.getString(2));
         obj.setHora(rs.getString(3));
         obj.setPrecio(rs.getFloat(4));
-        obj.setRuta(null);
-        obj.setAvion(null);
+        obj.setRuta(toRuta(rs.getInt(5)));
+        obj.setAvion(toAvion(rs.getInt(6)));
+        return obj;
+    }
+    
+    private static Avion toAvion(int n) throws SQLException, Exception{
+        Avion obj= new Avion();
+        String sql="select * from aviones where codigo_avion="+Integer.toString(n);
+        ResultSet rs =  airline.executeQuery(sql);
+        rs.next();
+        obj.setCodigo_avion(rs.getInt(1));
+        obj.setAnnio(rs.getString(2));
+        obj.setModelo(rs.getString(3));
+        obj.setMarca(rs.getString(4));
+        obj.setCant_pasajeros(rs.getInt(5));
+        obj.setCant_filas(rs.getInt(6));
+        obj.setCant_asientos_fila(rs.getInt(7));
+        return obj;
+    }
+    
+    private static Ruta toRuta(int n) throws SQLException, Exception{
+        Ruta obj= new Ruta();
+        String sql="select * from rutas where numero_ruta="+Integer.toString(n);
+        ResultSet rs =  airline.executeQuery(sql);
+        rs.next();
+        obj.setNumero(rs.getInt(1));
+        obj.setOrigen(toCiudad(rs.getString(2)));
+        obj.setDestino(toCiudad(rs.getString(3)));
+        obj.setDuracion(rs.getFloat(4));
+        return obj;
+    }
+    
+    private static Ciudad toCiudad(String n) throws SQLException, Exception{
+        Ciudad obj= new Ciudad();
+        String sql="select * from ciudades where codigo_ciudad=\'"+n+"\'";
+        ResultSet rs =  airline.executeQuery(sql);
+        rs.next();
+        obj.setCodigo(rs.getString(1));
+        obj.setNombre(rs.getString(2));
+        obj.setPais(rs.getString(3));
         return obj;
     }
     
