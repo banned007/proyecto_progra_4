@@ -36,7 +36,7 @@
                                 </div></div>
                             <div class="form-group" style="display: inline-block;"><label id="lbllegada">- Llegada -</label>
                                 <div class="input-append date" id="llegada"  data-date-format="yyyy/mm/dd">
-                                    <input class="span2" size="16" type="text" /> 
+                                    <input class="span2" size="16" type="text" id="llegada_input" /> 
                                     <span class="add-on"><i class="icon-th"></i></span>
                                 </div></div>
                             <div class="form-group" style="display: inline-block;"><label>-Pasajeros-</label><select id="pasajeros" class="form-control" ></select></div>
@@ -48,13 +48,26 @@
             </div>
         </div>
             <div class="panel panel-default" id="panel2">
-                            <div id="listadoDiv" style="display: block; vertical-align:top;">
+                    <form method="POST" name="formulario" id="formulario2" action="javascript:buy();" >
+                            <div id="listadoDiv" style="display: none; vertical-align:top;">
+                                <h1 class="titulo1">Vuelos - Ida &nbsp <span class="glyphicon glyphicon-hand-right"></span></h1>
                                 <table class="grid" id="t1">
-                                    <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Duración</th><th>Precio</th></thead>
+                                    <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Hora-Salida</th><th>Duración</th><th>Precio</th><th>Asientos Disponibles</th><th>Comprar</th></thead>
                                     <tbody id="listado"></tbody>
                                 </table>
 
                             </div>
+                            
+                            <div id="listadoDiv2" style="display: none; vertical-align:top;">
+                                <h1 class="titulo1">Vuelos - Regreso &nbsp <span class="glyphicon glyphicon-hand-left"></span></h1>
+                                <table class="grid" id="t2">
+                                    <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Hora-Salida</th><th>Duración</th><th>Precio</th><th>Asientos Disponibles</th><th>Comprar</th></thead>
+                                    <tbody id="listado2"></tbody>
+                                </table>
+
+                            </div>
+                            <center><input class="btn btn-primary" type="submit" style="display: none;" value="Confirmar" id="confirmar"></center>
+                    </form>
             </div>
       
             
@@ -108,6 +121,21 @@
                         view.showBuscados();
                     });
                 },
+                buscarRegreso: function () {
+                    var origen = this.view.$("#destino").val();
+                    var destino = this.view.$("#origen").val();
+                    var fecha = this.view.$("#llegada_input").val();
+                    console.log(origen);
+                    console.log(destino);
+                    console.log(fecha);
+                    var model = this.model;
+                    var view = this.view;
+                    Proxy.viajesSearch(origen, destino, fecha, function (result) {
+                        model.buscadosRegreso = result;
+                        view.showBuscados2();
+                    });
+                },
+                
                 login: function () {
                     var view = this.view;
                     usuario = new Usuario(document.getElementById("id").value, document.getElementById("clave").value, 0);
@@ -207,24 +235,37 @@
                     destino.options[i] = new Option(model.ciudades[i].nombre, model.ciudades[i].codigo);
                 }
 
-                origen.options[i] = new Option("Todas", "-");
-                destino.options[i] = new Option("Todas", "-");
+                origen.options[i] = new Option("Todas", "");
+                destino.options[i] = new Option("Todas", "");
 
                 ;
             }
 
             function fillComboPasajeros() {
                 var pasajeros = document.getElementById("pasajeros");
-                for (var i = 1; i < 21; i++) {
-                    pasajeros.options[i] = new Option(i, i);
+                for (var i = 0; i < 20; i++) {
+                    pasajeros.options[i] = new Option(i+1, i+1);
 
                 }
             }
             function doSearch() {
                 controller.buscarIda();
+                controller.buscarRegreso();
             }
             function showBuscados() {
                 listViajes();
+                var list=document.getElementById("listadoDiv");
+                list.style.display="block";
+                var btn=document.getElementById("confirmar");
+                btn.style.display="block";
+
+            }
+            function showBuscados2() {
+                listViajes2();
+                if(!document.getElementById("soloIda").checked)
+                        var list=document.getElementById("listadoDiv2");
+                        list.style.display="block";
+
 
             }
 
@@ -237,10 +278,48 @@
                 }
                 table = paginacion();
             }
+            function listViajes2() {
+                table2.destroy();
+                var listado = document.getElementById("listado2");
+                listado.innerHTML = "";
+                for (i = 0; i < model.buscadosRegreso.length; i++) {
+                    listViaje2(listado, model.buscadosRegreso[i]);
+                }
+                table2 = paginacion2();
+            }
+            
 
             var table = paginacion();
+            var table2 = paginacion2();
             function paginacion() {
                 return $('#t1').DataTable({"language": {"sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ boletos",
+                        "sZeroRecords": "No se encontraron viajes",
+                        "sEmptyTable": "No hay vuelos disponibles",
+                        "sInfo": "Mostrando boletos del _START_ al _END_ de un total de _TOTAL_ boletos",
+                        "sInfoEmpty": "Mostrando boletos del 0 al 0 de un total de 0 boletos",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ boletos)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }});
+
+            }
+            
+            function paginacion2() {
+                return $('#t2').DataTable({"language": {"sProcessing": "Procesando...",
                         "sLengthMenu": "Mostrar _MENU_ boletos",
                         "sZeroRecords": "No se encontraron viajes",
                         "sEmptyTable": "No hay vuelos disponibles",
@@ -280,14 +359,69 @@
                 td.appendChild(document.createTextNode(viaje.vuelo.ruta.destino.nombre));
                 tr.appendChild(td);
                 td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.vuelo.hora));
+                tr.appendChild(td);
+                td = document.createElement("td");
                 td.appendChild(document.createTextNode(viaje.vuelo.ruta.duracion));
                 tr.appendChild(td);
                 td = document.createElement("td");
                 td.appendChild(document.createTextNode(viaje.vuelo.precio));
                 tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.asientos_disponibles));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                var rb = document.createElement('input');
+                rb.type = 'radio';
+                rb.name = 'seleccionIda';
+                td.appendChild(rb);
+                tr.appendChild(td);
+                
+                
 
                 listado.appendChild(tr);
             }
+            
+            function listViaje2(listado2, viaje) {
+                var tr = document.createElement("tr");
+                var td;
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.numero_viaje));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.vuelo.ruta.origen.nombre));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.vuelo.ruta.destino.nombre));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.vuelo.hora));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.vuelo.ruta.duracion));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.vuelo.precio));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.appendChild(document.createTextNode(viaje.asientos_disponibles));
+                tr.appendChild(td);
+                td = document.createElement("td");
+                var rb = document.createElement('input');
+                rb.type = 'radio';
+                rb.name = 'seleccionRegreso';
+                td.appendChild(rb);
+                tr.appendChild(td);
+                
+                
+
+                listado2.appendChild(tr);
+            }
+            
+            function buy(){
+                document.location = "/Airline/Compra.jsp";
+            }
+            
 
             document.addEventListener("DOMContentLoaded", pageLoad)
         </script>        
