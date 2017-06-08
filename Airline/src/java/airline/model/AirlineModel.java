@@ -448,6 +448,32 @@ public class AirlineModel {
         obj.setViaje(toViaje(rs));
         return obj;
     }
+    
+    
+    public static int avionAdd(Avion avion) {
+        String sql = "insert into aviones "
+                + "(codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila) "
+                + "values (%d,'%s','%s','%s',%d, %d, %d)";
+        sql = String.format(sql, avion.getCodigo_avion(), avion.getAnnio(), avion.getModelo(), avion.getMarca(), avion.getCant_pasajeros(), avion.getCant_filas(), avion.getCant_asientos_fila());
+        return airline.executeUpdate(sql);
+    }
+ 
+    public static int avionUpdate(Avion avion)
+    {
+        String sql = "update aviones "
+                + " set annio = \""+avion.annio+"\", modelo = \""+avion.modelo+"\", marca = \""+avion.marca+"\", cant_pasajeros = "+Integer.toString(avion.cant_pasajeros)+", cant_filas = "+Integer.toString(avion.cant_filas)+", cant_asientos_fila = "+Integer.toString(avion.cant_asientos_fila)
+                + " where codigo_avion = "+Integer.toString(avion.codigo_avion);
+        int i=airline.executeUpdate(sql);
+        return i;
+    }
+    
+    public static int avionDelete(Avion avion)
+    {
+        String sql = "delete from aviones "
+                + "where codigo_avion = "+Integer.toString(avion.codigo_avion);
+        int i = airline.executeUpdate(sql);
+        return i;
+    }
    
 }
 

@@ -14,6 +14,20 @@
     </head>
     <body>
         <%@ include file="Header.jspf" %>
-        <h1>Hello World!</h1>
+        <div class="container" id="c1">
+    <div class="panel panel-default">
+    <div class="panel-body">
+        <br><br>
+        <h1 class="titulo1">Administración &nbsp <span class="glyphicon glyphicon-plane"></span></h1>
+        <hr>
+        
+       
+        <a href="/Airline/Gestion_Aviones.jsp" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-edit"></span> Gestion de Aviones
+        </a>
+        
+    </div>
+    </div>
+</div>
     </body>
 </html>

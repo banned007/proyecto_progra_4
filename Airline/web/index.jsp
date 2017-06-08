@@ -277,7 +277,6 @@
                 a += "</div>";
                 a += "<div class=\"carousel-caption\">";
                 a += "<h1 class=\"titulo3\">" + viaje.vuelo.ruta.origen.nombre + " - " + viaje.vuelo.ruta.destino.nombre + "    $" + viaje.vuelo.precio + "</h3>";//encabezado de producto
-                a += "<button type=\"submit\" href=\"#\" class=\"buybtn\">Comprar</button>";
                 a += "</div>";
 
                 var b = document.createElement("div");

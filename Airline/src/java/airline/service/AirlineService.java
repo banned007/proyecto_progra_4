@@ -71,6 +71,7 @@ public class AirlineService extends HttpServlet {
             List<Viaje> viajes;
             List<Tiquete> tiquetes;
             Cliente client;
+            List<Avion> aviones;
             switch(accion){
                 case "ciudadListAll":
                     ciudades = AirlineModel.getCiudades();
@@ -199,6 +200,26 @@ public class AirlineService extends HttpServlet {
                     List<Integer> array = AirlineModel.getAsientosNoDisponibles(json);
                     json = gson.toJson(array);
                     out.write(json);
+                    break;
+                case "AvionInsert":
+                    json = request.getParameter("avion");
+                    Avion AvionAdd= gson.fromJson(json, Avion.class);
+                    out.write((AirlineModel.avionAdd(AvionAdd)==1)?"0":"1");
+                    break;
+                case "avionList":
+                    aviones = AirlineModel.getAviones();
+                    json = gson.toJson(aviones);
+                    out.write(json);
+                    break;
+                case "AvionUpdate":
+                    json = request.getParameter("avion");
+                    Avion AvionUpdate= gson.fromJson(json, Avion.class);
+                    out.write((AirlineModel.avionUpdate(AvionUpdate)==1)?"0":"1");
+                    break;
+                case "AvionDelete":
+                    json = request.getParameter("avion");
+                    Avion AvionDelete= gson.fromJson(json, Avion.class);
+                    out.write((AirlineModel.avionDelete(AvionDelete)==1)?"0":"1");
                     break;
                     
             }

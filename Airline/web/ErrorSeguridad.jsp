@@ -15,9 +15,9 @@
         <%@ include file="Header.jspf" %>
         
         <div style="text-align:center;">
-            <h1 > Error de seguridad!</h1>
-            <image src="" style="display: block; margin: auto; width: 200px">
-
+           <br><br><br><br><br><br>
+            <image src="img/seguridad.gif" style="display: block; margin: auto; width: 200px">
+            <h1>No hay nada aquí!!!</h1>
         </div>
 
 <script> // Model

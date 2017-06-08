@@ -235,3 +235,12 @@ html,body{
 
 .panel-title {display: inline;font-weight: bold;}
 .pl-ziro { padding-left: 0px; }
+
+.center_div{
+    margin: 0 auto;
+    width:72% /* value of your choice which suits your alignment */
+}
+.center_div_button{
+    margin: 0 auto;
+    width:45% /* value of your choice which suits your alignment */
+}

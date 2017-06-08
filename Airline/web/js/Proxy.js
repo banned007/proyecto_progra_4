@@ -255,3 +255,65 @@ Proxy.clientUpdate = function(cliente,callBack){
     };
     AJAX_req.send("cliente="+jsonCliente); 
 };
+
+Proxy.avionAdd = function(avion, callBack){
+    var jsonAvion = JSON.stringify(avion, JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    
+    console.log(jsonAvion);
+    url="/Airline/AirlineService?action=AvionInsert";
+    AJAX_req.open("POST", url, true);
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if(AJAX_req.readyState===4 && AJAX_req.status === 200)
+            callBack(parseInt(AJAX_req.responseText));
+    };
+    AJAX_req.send("avion="+jsonAvion);
+};
+
+Proxy.avionSearch = function (callBack)
+{
+    var AJAX_req = new XMLHttpRequest();
+    url = "/Airline/AirlineService?action=avionList";
+    AJAX_req.open("GET", url, true);
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function () {
+        if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
+            var object = JSON.parse(AJAX_req.responseText, JsonUtils.revive);
+            callBack(object);
+        }
+    };
+    AJAX_req.send();
+};
+
+Proxy.avionUpdate = function(avion, callBack)
+{
+    var jsonAvion = JSON.stringify(avion, JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    
+    console.log(jsonAvion);
+    url="/Airline/AirlineService?action=AvionUpdate";
+    AJAX_req.open("POST", url, true);
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if(AJAX_req.readyState===4 && AJAX_req.status === 200)
+            callBack(parseInt(AJAX_req.responseText));
+    };
+    AJAX_req.send("avion="+jsonAvion);
+};
+
+Proxy.avionDelete = function(avion, callBack)
+{
+    var jsonAvion = JSON.stringify(avion, JsonUtils.replacer);
+    var AJAX_req = new XMLHttpRequest();
+    
+    console.log(jsonAvion);
+    url="/Airline/AirlineService?action=AvionDelete";
+    AJAX_req.open("POST", url, true);
+    AJAX_req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    AJAX_req.onreadystatechange = function(){
+        if(AJAX_req.readyState===4 && AJAX_req.status === 200)
+            callBack(parseInt(AJAX_req.responseText));
+    };
+    AJAX_req.send("avion="+jsonAvion);
+};

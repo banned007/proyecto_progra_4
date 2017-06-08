@@ -362,8 +362,8 @@ $(document).on('click', '.input-remove-row', function(){
                             break;
                 }
             });
-            var tiqueteIda = new Tiquete(null,"Nombre: "+nombre+"No. Pasaporte: "+pasaporte, null, controller.model.viajeIda);
-            var tiqueteRegreso = new Tiquete(null, "Nombre: "+nombre+"No. Pasaporte: "+pasaporte, null, controller.model.viajeRegreso);
+            var tiqueteIda = new Tiquete(null,"Nombre: "+nombre+" No. Pasaporte: "+pasaporte, null, controller.model.viajeIda);
+            var tiqueteRegreso = new Tiquete(null, "Nombre: "+nombre+" No. Pasaporte: "+pasaporte, null, controller.model.viajeRegreso);
             controller.addTiquete(tiqueteIda, asientoIda);
             controller.addTiquete(tiqueteRegreso, asientoRegreso);
             
@@ -385,7 +385,7 @@ $(document).on('click', '.input-remove-row', function(){
                             break;
                 }
             });
-            var tiqueteIda = new Tiquete(null, nombre+pasaporte, null, controller.model.viajeIda);
+            var tiqueteIda = new Tiquete(null,"Nombre: "+nombre+" No. Pasaporte: "+pasaporte, null, controller.model.viajeIda);
             controller.addTiquete(tiqueteIda, asientoIda);   
         });
     }
