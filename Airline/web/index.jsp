@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : 20-may-2017, 18:27:10
     Author     : kerly
@@ -50,7 +50,7 @@
             <div class="panel panel-default" id="panel2">
                     <form method="POST" name="formulario" id="formulario2" action="javascript:buy();" >
                             <div id="listadoDiv" style="display: none; vertical-align:top;">
-                                <h1 class="titulo1">Vuelos - Ida &nbsp <span class="glyphicon glyphicon-hand-right"></span></h1>
+                                <h1 class="titulo1">Ida &nbsp <span class="glyphicon glyphicon-hand-right"></span></h1>
                                 <table class="grid" id="t1">
                                     <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Hora-Salida</th><th>Duración</th><th>Precio</th><th>Asientos Disponibles</th><th>Comprar</th></thead>
                                     <tbody id="listado"></tbody>
@@ -59,7 +59,7 @@
                             </div>
                             
                             <div id="listadoDiv2" style="display: none; vertical-align:top;">
-                                <h1 class="titulo1">Vuelos - Regreso &nbsp <span class="glyphicon glyphicon-hand-left"></span></h1>
+                                <h1 class="titulo1">Regreso &nbsp <span class="glyphicon glyphicon-hand-left"></span></h1>
                                 <table class="grid" id="t2">
                                     <thead><tr><th>Código</th><th>Origen</th><th>Destino</th><th>Hora-Salida</th><th>Duración</th><th>Precio</th><th>Asientos Disponibles</th><th>Comprar</th></thead>
                                     <tbody id="listado2"></tbody>
@@ -111,12 +111,13 @@
                     var origen = this.view.$("#origen").val();
                     var destino = this.view.$("#destino").val();
                     var fecha = this.view.$("#salida_input").val();
+                    var pasajeros = this.view.$("#pasajeros").val();
                     console.log(origen);
                     console.log(destino);
                     console.log(fecha);
                     var model = this.model;
                     var view = this.view;
-                    Proxy.viajesSearch(origen, destino, fecha, function (result) {
+                    Proxy.viajesSearch(origen, destino, fecha, pasajeros, function (result) {
                         model.buscadosIda = result;
                         view.showBuscados();
                     });
@@ -125,12 +126,13 @@
                     var origen = this.view.$("#destino").val();
                     var destino = this.view.$("#origen").val();
                     var fecha = this.view.$("#llegada_input").val();
+                    var pasajeros = this.view.$("#pasajeros").val();
                     console.log(origen);
                     console.log(destino);
                     console.log(fecha);
                     var model = this.model;
                     var view = this.view;
-                    Proxy.viajesSearch(origen, destino, fecha, function (result) {
+                    Proxy.viajesSearch(origen, destino, fecha, pasajeros, function (result) {
                         model.buscadosRegreso = result;
                         view.showBuscados2();
                     });
@@ -189,12 +191,73 @@
                     }
 
                 });
+                
+                
+                
+                var conf = document.getElementById("formulario2");
+                conf.addEventListener("submit", doValidate);
 
-
+              
 
             }
-            
-
+            function doValidate(event){
+                var ida = document.getElementById("soloIda");
+                if(ida.checked){
+                    if(document.getElementsByName("seleccionIda").length>0){
+                    console.log("ida");
+                    var ida = document.getElementsByName("seleccionIda");
+                    var sel3;
+                    for(var i =0; i< ida.length; i++){
+                        if(ida[i].checked){
+                            sel3 =ida[i].id;
+                            console.log(sel3);
+                        }
+                    }
+                    if(sel3!=null){
+                        sessionStorage.setItem("viajeIda", sel3);
+                    }else{
+                        window.alert("Seleccione el viaje de Ida");
+                        event.preventDefault();
+                    }
+                }
+                }else{
+                
+                if(document.getElementsByName("seleccionIda").length>0){
+                    console.log("ida");
+                    var ida = document.getElementsByName("seleccionIda");
+                    var sel;
+                    for(var i =0; i< ida.length; i++){
+                        if(ida[i].checked){
+                            sel =ida[i].id;
+                            console.log(sel);
+                        }
+                    }
+                    if(sel!=null){
+                        sessionStorage.setItem("viajeIda", sel);
+                    }else{
+                        window.alert("Seleccione el viaje de Ida");
+                        event.preventDefault();
+                    }
+                }
+                if(document.getElementsByName("seleccionRegreso").length>0){
+                    console.log("regreso");
+                    var regreso = document.getElementsByName("seleccionRegreso");
+                    var sel2;
+                    for(var i =0; i< regreso.length; i++){
+                        if(regreso[i].checked){
+                            sel2 =regreso[i].id;
+                            console.log(sel2);
+                        }
+                    }
+                    if(sel2!=null){
+                        sessionStorage.setItem("viajeRegreso", sel2);
+                    }else{
+                        window.alert("Seleccione el viaje de Regreso");
+                        event.preventDefault();
+                    }
+                }
+            }
+            }
 
             function showPromos() {
                 for (var a = 0; a < model.promo.length; a++)
@@ -249,8 +312,14 @@
                 }
             }
             function doSearch() {
-                controller.buscarIda();
-                controller.buscarRegreso();
+                var ida = document.getElementById("soloIda");
+                sessionStorage.setItem("numeroPasajeros", document.getElementById("pasajeros").value);
+                if(ida.checked)
+                    controller.buscarIda();
+                else{
+                    controller.buscarIda();
+                    controller.buscarRegreso();
+                }
             }
             function showBuscados() {
                 listViajes();
@@ -374,6 +443,8 @@
                 var rb = document.createElement('input');
                 rb.type = 'radio';
                 rb.name = 'seleccionIda';
+                rb.class='seleccion_Ida';
+                rb.id = viaje.numero_viaje;
                 td.appendChild(rb);
                 tr.appendChild(td);
                 
@@ -410,6 +481,8 @@
                 var rb = document.createElement('input');
                 rb.type = 'radio';
                 rb.name = 'seleccionRegreso';
+                rb.id = viaje.numero_viaje;
+                rb.class='seleccion_Regreso';
                 td.appendChild(rb);
                 tr.appendChild(td);
                 
@@ -419,11 +492,12 @@
             }
             
             function buy(){
-                document.location = "/Airline/Compra.jsp";
+               document.location = "/Airline/Compra.jsp";
+               console.log("listo");
             }
             
 
-            document.addEventListener("DOMContentLoaded", pageLoad)
+            document.addEventListener("DOMContentLoaded", pageLoad);
         </script>        
 
 

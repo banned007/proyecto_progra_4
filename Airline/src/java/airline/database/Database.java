@@ -55,6 +55,7 @@ public class Database {
         try {
             Statement stm = cnx.createStatement();
             stm.executeUpdate(statement,Statement.RETURN_GENERATED_KEYS);
+            
             return stm.getGeneratedKeys();
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);

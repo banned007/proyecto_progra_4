@@ -1,5 +1,3 @@
-
-
 CREATE DATABASE AirlineDatabase;
 use AirlineDatabase;
 
@@ -25,14 +23,16 @@ constraint fk_usuarios foreign key (id) references  usuarios (id)
 
 
 
-/*
+
 create table compras(
 numero_compra integer not null auto_increment,
 usuario varchar(12),
-constraint pk_numero_compra primary key(numero_compra),
-constraint fk_usuario foreign key(usuario) references usuarios(usuario)
+datos_compra varchar(100),
+totalCompra float,
+constraint pk_compra primary key(numero_compra),
+constraint fk_compra foreign key(usuario) references usuarios(id)
 );
-*/
+
 
 
 create table ciudades(
@@ -99,33 +99,34 @@ constraint fk_vuelo foreign key(vuelo) references vuelos(numero_vuelo)
 
 
 
-/*
 create table tiquetes(
 numero_tiquete integer not null auto_increment,
 datos_persona varchar(200) not null,
 compra integer not null,
 viaje integer not null,
-constraint pk_numero_tiquete primary key(numero_tiquete),
-constraint fk_compra foreign key(compra) references compras(numero_compra),
-constraint fk_viaje foreign key(viaje) references viajes(numero_viaje)
+constraint pk_tiquete primary key(numero_tiquete),
+constraint fk_tiquete1 foreign key(compra) references compras(numero_compra),
+constraint fk_tiquete2 foreign key(viaje) references viajes(numero_viaje)
 );
+
+
 
 create table aviones_tiquetes(
 tiquete integer not null,
 avion integer not null,
 numero_asiento integer not null,
 constraint pk_tiquete_avion primary key(tiquete, avion),
-constraint fk_tiquete_1 foreign key(tiquete) references tiquetes(numero_tiquete),
-constraint fk_avion_2 foreign key(avion) references aviones(numero_avion)
+constraint fk_tiquete_avion1 foreign key(tiquete) references tiquetes(numero_tiquete),
+constraint fk_tiquete_avion2 foreign key(avion) references aviones(codigo_avion)
 );
-*/
+
 
 
 
 insert into usuarios (id,clave,tipo) values ('001','001', 1);
 insert into usuarios (id,clave,tipo) values ('002','002', 2);
 
-insert into clientes (id,nombre,apellido,correo_electronico,fecha_nacimiento,direccion,telefono_trabajo,celular) values ('001', 'Kerly','Gomez','k.e.r.l.y013@gmail.com','12/09/1998','Heredia','111-1111','7072-4345');
+insert into clientes (id,nombre,apellido,correo_electronico,fecha_nacimiento,direccion,telefono_trabajo,celular) values ('001', 'Kerly','Gomez','k.e.r.l.y013@gmail.com','12/09/1998','Heredia','1111111','70724345');
 
 
 insert into ciudades values ('MIA', 'Miami', 'Estados Unidos');
@@ -137,6 +138,7 @@ insert into rutas(numero_ruta, origen, destino, duracion) values (1, 'MIA', 'GYE
 insert into rutas(numero_ruta, origen, destino, duracion) values (2, 'MIA', 'SJO', 1.30);
 insert into rutas(numero_ruta, origen, destino, duracion) values (3, 'SJO', 'GYE', 2.30);
 insert into rutas(numero_ruta, origen, destino, duracion) values (4, 'BGA', 'SJO', 4.30);
+insert into rutas(numero_ruta, origen, destino, duracion) values (5, 'GYE', 'MIA', 3.30);
 
 insert into aviones values(1, '2012', 'AAA', 'BBB', 30, 2, 15);
 
@@ -144,9 +146,13 @@ insert into vuelos values (1, 'L', '2:30', 120, 1, 1);
 insert into vuelos values (2, 'M', '3:30', 130, 2, 1);
 insert into vuelos values (3, 'J', '4:30', 140, 3, 1);
 insert into vuelos values (4, 'V', '5:30', 150, 4, 1);
+insert into vuelos values (5, 'V', '5:30', 150, 5, 1);
 
 insert into viajes values (1, 1, '2017/05/05', 30, 1);
 insert into viajes values (2, 2, '2017/05/06', 30, 1);
 insert into viajes values (3, 3, '2017/05/08', 30, 1);
 insert into viajes values (4, 4, '2017/05/09', 30, 1);
+insert into viajes values (7, 5, '2017/05/09', 30, 1);
 
+insert into viajes values (5, 1, '2017/05/05', 30, 1);
+insert into viajes values (6, 1, '2017/05/05', 30, 1);

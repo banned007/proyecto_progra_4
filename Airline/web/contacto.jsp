@@ -10,11 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Contactenos</title>
-        <%@ include file="Imports.jspf" %>        
+        <%@ include file="Imports.jspf" %> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+        <script type="text/javascript" src="js/html2canvas.js"></script> 
     </head>
     <body>
         <%@ include file="Header.jspf" %>
-        <div class="container">
+        <div class="container" id="c1">
     <div class="panel panel-default">
     <div class="panel-body">
         <br><br>
@@ -29,6 +31,7 @@
         </p>
         <hr>
         <img class="iconn" src="img/facebook.png"><img class="iconn" src="img/twitter.png"><img class="iconn" src="img/instagram.png">
+        <button class="btn btn-success btn-lg btn-block" type="button" onclick="exportar()"></button>
         
     </div>
     </div>
@@ -90,6 +93,23 @@
             controller = new AirController(model, window);
   
         }
+        
+        function exportar(){
+            var compra = document.getElementById("c1");  
+            html2canvas(compra, {
+                onrendered: function(canvas) {
+                  var img = canvas.toDataURL("image/png");
+                  var doc = new jsPDF({
+                    unit:'px',
+                    format:'a4'
+                  });
+                  doc.addImage(img,'PNG', 0, 0);
+                  doc.save("tiquete.pdf");
+
+                }
+            });
+        }
+        
         document.addEventListener("DOMContentLoaded", pageLoad);
     </script>
     </body>

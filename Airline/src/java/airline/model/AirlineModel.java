@@ -143,6 +143,41 @@ public class AirlineModel {
        return vuelos;
     }
     
+    public static int registrarCompra(Compra compra) throws SQLException{
+        String sql="insert into compras "+
+                    "(usuario, datos_compra, totalCompra) "+
+                    "values('"+compra.getUsuario().getId()+"', '"+compra.getDatosCompra()+"', "+compra.getTotalCompra()+")";
+            System.out.println(sql);
+            ResultSet keys =airline.executeUpdateWithKeys(sql);
+            keys.next();
+            return keys.getInt(1);
+       
+           
+    }
+    public static int registrarTiquete(Tiquete tiquete, String asiento) throws SQLException{
+        String sql="insert into tiquetes "+
+                    "(datos_persona, compra, viaje) "+
+                    "values('"+tiquete.getDatos_persona()+"', "+tiquete.getCompra().getNumero_compra()+", "+tiquete.getViaje().getNumero_viaje()+")";
+            System.out.println(sql);
+            ResultSet keys =airline.executeUpdateWithKeys(sql);
+            keys.next();
+            int v = registrarAsiento(keys.getInt(1), tiquete.getViaje().getVuelo().getAvion(), asiento);
+        String sql2="update viajes set asientos_disponibles=asientos_disponibles-1 where viajes.numero_viaje="+tiquete.getViaje().getNumero_viaje();
+        airline.executeUpdateWithKeys(sql2);
+            return keys.getInt(1);
+       
+           
+    }
+    
+    private static Compra toCompra(ResultSet rs) throws SQLException, Exception{
+        Compra obj= new Compra();
+        obj.setNumero_compra(rs.getInt("numero_compra"));
+        obj.setUsuario(toUser(rs));
+        obj.setDatosCompra(rs.getString("datos_compra"));
+        obj.setTotalCompra(rs.getFloat("totalCompra"));
+        return obj;
+    }
+    
     private static Vuelo toVuelo(ResultSet rs) throws SQLException, Exception{
         Vuelo obj= new Vuelo();
         System.out.print(rs.getInt(1));
@@ -195,7 +230,7 @@ public class AirlineModel {
        return viajes;
     }
     
-    public static List<Viaje> getBusquedaViajes(String origen, String destino, String fecha) throws Exception {
+    public static List<Viaje> getBusquedaViajes(String origen, String destino, String fecha, String pasajeros) throws Exception {
         List<Viaje> viajes;
         viajes= new ArrayList();
         try {
@@ -207,9 +242,9 @@ public class AirlineModel {
 "                    and rutas.destino=c2.codigo_ciudad\n" +
 "                    and origen='%s'\n" +
 "                    and destino='%s'\n"+ 
-                    "and dia_especifico='%s'";  
+                    "and dia_especifico='%s' and asientos_disponibles>=%s";  
             System.out.println(sql);
-            sql=String.format(sql, origen, destino, fecha);
+            sql=String.format(sql, origen, destino, fecha, pasajeros);
             ResultSet rs =  airline.executeQuery(sql);
             while (rs.next()) {
                 viajes.add(toViaje(rs));
@@ -219,6 +254,31 @@ public class AirlineModel {
         }
        return viajes;
     }
+    
+    public static Viaje getViaje(String codigo) throws Exception {
+        Viaje viaje = new Viaje();
+        
+        try {
+            String sql="select numero_viaje, vuelo, dia_especifico, asientos_disponibles, promocion, numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from viajes, vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where viajes.vuelo=vuelos.numero_vuelo\n" +
+"                    and vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad\n" +
+"                    and numero_viaje='%s'\n"; 
+            System.out.println(sql);
+            sql=String.format(sql, codigo);
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                viaje =toViaje(rs);
+            }
+        } catch (SQLException ex) {
+            System.err.print(ex);
+        }
+       return viaje;
+    }
+    
+    
     
     private static Viaje toViaje(ResultSet rs) throws SQLException, Exception{
         Viaje obj= new Viaje();
@@ -291,6 +351,102 @@ public class AirlineModel {
                     "where id='%s'";
             sql=String.format(sql,cliente.getNombre(),cliente.getApellido(), cliente.getCorreo_electronico(), cliente.getFecha_nacimiento(), cliente.getDireccion(), cliente.getTelefono_trabajo(), cliente.getCelular(),cliente.getId());
             return airline.executeUpdate(sql);
+    }
+    
+    public static int registrarAsiento(int tiquete, Avion avion, String asiento) {
+        int a;
+        a = Integer.parseInt(asiento);
+         String sql="insert into aviones_tiquetes "+
+                    "(tiquete, avion, numero_asiento) "+
+                    "values (%d,%d,%d)";
+            sql=String.format(sql,tiquete,avion.getCodigo_avion(),a);
+            return airline.executeUpdate(sql);
+    }
+    
+    
+    public static List<Integer> getAsientosNoDisponibles(String codigo){
+        List<Integer> array;
+        array = new ArrayList();
+        int a;
+        a = Integer.parseInt(codigo);
+        try {
+            String sql="select numero_asiento from aviones_tiquetes, tiquetes "
+                    + "where aviones_tiquetes.tiquete = tiquetes.numero_tiquete "
+                    + "and tiquetes.viaje="+a;  
+            System.out.println(sql);
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                array.add(rs.getInt("numero_asiento"));
+            }
+        } catch (SQLException ex) {
+            System.err.print(ex);
+        }
+        System.out.println(array);
+        return array;
+    }
+    
+    public static List<Tiquete> getBusquedaTiquetes(String codigo) throws Exception {
+        List<Tiquete> tiquetes;
+        int a = Integer.parseInt(codigo);
+        tiquetes= new ArrayList();
+        try {
+            String sql="select numero_tiquete, id, clave, tipo, datos_persona,numero_compra, datos_compra, totalCompra, numero_viaje, vuelo, dia_especifico, asientos_disponibles, promocion, numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from tiquetes, compras, usuarios, viajes, vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where tiquetes.viaje = viajes.numero_viaje "
+                    + "and tiquetes.compra = compras.numero_compra "
+                    + "and compras.usuario = usuarios.id "
+                    + "and viajes.vuelo=vuelos.numero_vuelo\n" +
+"                    and vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad\n" +
+"                    and numero_compra="+a; 
+            System.out.println(sql);
+          
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                tiquetes.add(toTiquete(rs));
+            }
+        } catch (SQLException ex) {
+            System.err.print(ex);
+        }
+       return tiquetes;
+    }
+    
+    public static List<Tiquete> getBusquedaTiquetesById(String codigo) throws Exception {
+        List<Tiquete> tiquetes;
+        int a = Integer.parseInt(codigo);
+        tiquetes= new ArrayList();
+        try {
+            String sql="select numero_tiquete, id, clave, tipo, datos_persona,numero_compra, datos_compra, totalCompra, numero_viaje, vuelo, dia_especifico, asientos_disponibles, promocion, numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from tiquetes, compras, usuarios, viajes, vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where tiquetes.viaje = viajes.numero_viaje "
+                    + "and tiquetes.compra = compras.numero_compra "
+                    + "and compras.usuario = usuarios.id "
+                    + "and viajes.vuelo=vuelos.numero_vuelo\n" +
+"                    and vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad\n" +
+"                    and id="+a; 
+            System.out.println(sql);
+          
+            ResultSet rs =  airline.executeQuery(sql);
+            while (rs.next()) {
+                tiquetes.add(toTiquete(rs));
+            }
+        } catch (SQLException ex) {
+            System.err.print(ex);
+        }
+       return tiquetes;
+    }
+    
+
+    private static Tiquete toTiquete(ResultSet rs) throws SQLException, Exception {
+        Tiquete obj= new Tiquete();
+        obj.setNumero_tiquete(rs.getInt("numero_tiquete"));
+        obj.setDatos_persona(rs.getString("datos_persona"));
+        obj.setCompra(toCompra(rs));
+        obj.setViaje(toViaje(rs));
+        return obj;
     }
    
 }

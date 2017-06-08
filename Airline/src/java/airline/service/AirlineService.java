@@ -9,9 +9,11 @@ import airline.model.AirlineModel;
 import airline.model.Avion;
 import airline.model.Ciudad;
 import airline.model.Cliente;
+import airline.model.Compra;
 import airline.model.Horario;
 import airline.model.Jsonable;
 import airline.model.Ruta;
+import airline.model.Tiquete;
 import airline.model.Usuario;
 import airline.model.Viaje;
 import airline.model.Vuelo;
@@ -20,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,7 +59,9 @@ public class AirlineService extends HttpServlet {
                     .registerSubtype(Usuario.class,"Usuario")
                     .registerSubtype(Cliente.class,"Cliente")
                     .registerSubtype(Viaje.class,"Viaje")
-                    .registerSubtype(Avion.class,"Avion");
+                    .registerSubtype(Avion.class,"Avion")
+                    .registerSubtype(Compra.class,"Compra")
+                    .registerSubtype(Tiquete.class,"Tiquete");
             Gson gson = new GsonBuilder().registerTypeAdapterFactory(rta).setDateFormat("dd/MM/yyyy").create();
             String json;
             String accion = request.getParameter("action");
@@ -64,6 +69,7 @@ public class AirlineService extends HttpServlet {
             List<Ciudad> ciudades;
             List<Vuelo> vuelos;
             List<Viaje> viajes;
+            List<Tiquete> tiquetes;
             Cliente client;
             switch(accion){
                 case "ciudadListAll":
@@ -81,10 +87,60 @@ public class AirlineService extends HttpServlet {
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
                     String fecha= request.getParameter("fecha");
-                    viajes = AirlineModel.getBusquedaViajes(origen,destino, fecha);
+                    String pasajeros= request.getParameter("pasajeros");
+                    viajes = AirlineModel.getBusquedaViajes(origen,destino, fecha, pasajeros);
                     json = gson.toJson(viajes);
                     out.write(json);
                     break;
+                case "viajeSearch":
+                    String codigo = request.getParameter("codigo");
+                    Viaje viaje = AirlineModel.getViaje(codigo);
+                    json = gson.toJson(viaje);
+                    out.write(json);
+                    break;
+                case "CompraAdd":
+                    json = request.getParameter("compra");
+                    Compra compra= gson.fromJson(json, Compra.class);
+                    int numero;
+                    numero=AirlineModel.registrarCompra(compra);
+                    System.out.println(numero);
+                    out.write(Integer.toString(numero));
+                    break;
+                case "TiqueteAdd":
+                    json = request.getParameter("tiquete");
+                    Tiquete tiquete= gson.fromJson(json, Tiquete.class);
+                    json = request.getParameter("asiento");
+                    int numero2;
+                    numero2=AirlineModel.registrarTiquete(tiquete, json);
+                    System.out.println(numero2);
+                    out.write(Integer.toString(numero2));
+                    break;
+                    
+                case "tiquetesSearch":
+                    String codigo3 = request.getParameter("codigo");
+                    tiquetes = AirlineModel.getBusquedaTiquetes(codigo3);
+                    json = gson.toJson(tiquetes);
+                    out.write(json);
+                    break;
+                case "tiquetesSearchById":
+                    String codigo4 = request.getParameter("codigo");
+                    tiquetes = AirlineModel.getBusquedaTiquetesById(codigo4);
+                    json = gson.toJson(tiquetes);
+                    out.write(json);
+                    break;
+                    /*
+                case "AsientoAdd":
+                    json = request.getParameter("tiquete");
+                    Tiquete tiquete2= gson.fromJson(json, Tiquete.class);
+                    json = request.getParameter("avion");
+                    Avion avion2= gson.fromJson(json, Avion.class);
+                    json = request.getParameter("asiento");
+                    String asiento = json;
+                    int numero3;
+                    numero3=AirlineModel.registrarAsiento(tiquete2, avion2, asiento);
+                    System.out.println(numero3);
+                    out.write(1);
+                    break;*/
                 case "userLogin":
                     json = request.getParameter("user");
                     Usuario user= gson.fromJson(json, Usuario.class);
@@ -138,6 +194,13 @@ public class AirlineService extends HttpServlet {
                     int updated2 = AirlineModel.clientUpdate(clienteUpdate); 
                     out.write((updated2==1)?"0":"1");
                     break;
+                case "asientosSearch":
+                    json = request.getParameter("codigo");
+                    List<Integer> array = AirlineModel.getAsientosNoDisponibles(json);
+                    json = gson.toJson(array);
+                    out.write(json);
+                    break;
+                    
             }
         }
         catch(Exception e){
