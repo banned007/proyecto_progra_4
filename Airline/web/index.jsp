@@ -41,9 +41,10 @@
                                 </div></div>
                             <div class="form-group" style="display: inline-block;"><label>-Pasajeros-</label><select id="pasajeros" class="form-control" ></select></div>
                             <label>Solo ida</label><input type="checkbox" id="soloIda" name="soloIda" >
-                            <input class="btn btn-default" type="submit" value="Buscar" >   
+                            <input class="btn btn-default" type="submit" value="Buscar" >
                         </form>
-                    </div></center>                    
+                        
+                    </div></center> 
                 </div>
             </div>
         </div>
@@ -68,6 +69,7 @@
                             </div>
                             <center><input class="btn btn-primary" type="submit" style="display: none;" value="Confirmar" id="confirmar"></center>
                     </form>
+                
             </div>
       
             
@@ -104,6 +106,11 @@
                         view.showPromos();
                     });
                     model.buscados = [];
+                    
+                    Proxy.tipoCambioVenta(function(result){
+                        console.log(result);
+                        sessionStorage.setItem("tipoCambioVenta", result);
+                    });
 
                 },
 
@@ -191,6 +198,8 @@
                     }
 
                 });
+                
+ 
                 
                 
                 
@@ -324,6 +333,7 @@
                 listViajes();
                 var list=document.getElementById("listadoDiv");
                 list.style.display="block";
+                
                 var btn=document.getElementById("confirmar");
                 btn.style.display="block";
 
@@ -472,6 +482,7 @@
                 tr.appendChild(td);
                 td = document.createElement("td");
                 td.appendChild(document.createTextNode(viaje.vuelo.precio));
+                td.value=viaje.vuelo.precio;
                 tr.appendChild(td);
                 td = document.createElement("td");
                 td.appendChild(document.createTextNode(viaje.asientos_disponibles));

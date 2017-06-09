@@ -65,7 +65,16 @@
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="amount" name="amount" value="0"  disabled required> <%--precio del vuelo o suma de los dos vuelos--%>
                                 </div>
-                            </div>   
+                            </div>  
+                            <button class="btn btn-alert btn-lg btn-block" data-toggle="collapse" data-target="#demo">Ver en Colones</button>
+                            <div id="demo" class="collapse">
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label"><i class="fa fa-money" style="font-size:24px"></i></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="amountColones" name="amount" value="0"  disabled required> <%--precio del vuelo o suma de los dos vuelos--%>
+                                </div>
+                            </div> 
+                            </div> 
                             <div class="form-group">
                                 <div class="col-sm-12 text-right">
                                     <button type="submit" class="btn btn-default preview-add-button" id='btnAdd'>
@@ -288,6 +297,7 @@
                 var v = parseFloat(document.getElementById("amount").value);
                 v+=valor;
                 document.getElementById("amount").value=String(v);
+                document.getElementById("amountColones").value=String(v * parseFloat(sessionStorage.getItem("tipoCambioVenta")));
             }
             
             function calc_total(){

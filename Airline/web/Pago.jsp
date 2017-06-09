@@ -56,9 +56,16 @@
                         </div>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right"><input type="text" id="lblValor"  disabled/></span> VALOR TOTAL</a>
+                <li class="active"><a href="#"><span class="badge pull-right"><input type="text" id="lblValor"  disabled/></span> &nbsp;&nbsp;VALOR TOTAL<span class="glyphicon glyphicon-usd"></span></a>
                 </li>
-            </ul>
+                    </ul>
+                         <button class="btn btn-alert btn-lg btn-block" data-toggle="collapse" data-target="#demo">Ver en Colones</button>
+                            <div id="demo" class="collapse">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active"><a href="#"><span class="badge pull-right"><input type="text" id="lblValorColones"  disabled/></span>&nbsp;&nbsp; VALOR en COLONES<i class="fa fa-money" style="font-size:24px"></i></a>
+                            </li>
+                            </ul>
+                            </div> 
             <br/>
             <button class="btn btn-success btn-lg btn-block" type="submit" id="btnPagar">Pagar</button>
             </form>
@@ -178,6 +185,8 @@
             model = new AirModel();
             controller = new AirController(model, window);
             document.getElementById("lblValor").value=sessionStorage.getItem("totalCompra");
+            console.log(sessionStorage.getItem("tipoCambioVenta"));
+            document.getElementById("lblValorColones").value=parseFloat(sessionStorage.getItem("totalCompra"))*parseFloat(sessionStorage.getItem("tipoCambioVenta"));
   
         }
         

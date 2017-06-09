@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Viaje implements Jsonable{
 
-    public Viaje(int numero_viaje, Vuelo vuelo, Date dia_especifico, int asientos_disponibles, int promocion) {
+    public Viaje(int numero_viaje, Vuelo vuelo, String dia_especifico, int asientos_disponibles, int promocion) {
         this.numero_viaje = numero_viaje;
         this.vuelo = vuelo;
         this.dia_especifico = dia_especifico;
@@ -24,7 +24,7 @@ public class Viaje implements Jsonable{
     public Viaje(){
         this.numero_viaje = 0;
         this.vuelo = new Vuelo();
-        this.dia_especifico = new Date();
+        this.dia_especifico = "";
         this.asientos_disponibles = 0;
         this.promocion=0;
     }
@@ -45,11 +45,11 @@ public class Viaje implements Jsonable{
         this.vuelo = vuelo;
     }
 
-    public Date getDia_especifico() {
+    public String getDia_especifico() {
         return dia_especifico;
     }
 
-    public void setDia_especifico(Date dia_especifico) {
+    public void setDia_especifico(String dia_especifico) {
         this.dia_especifico = dia_especifico;
     }
 
@@ -70,7 +70,7 @@ public class Viaje implements Jsonable{
     }
     int numero_viaje;
     Vuelo vuelo;
-    Date dia_especifico;
+    String dia_especifico;
     int asientos_disponibles;
     int promocion;
     

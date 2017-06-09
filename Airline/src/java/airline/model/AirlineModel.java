@@ -246,8 +246,12 @@ public class AirlineModel {
         List<Viaje> viajes;
         viajes= new ArrayList();
         try {
-            String sql="select * from "+
-                    "viajes";
+            String sql="select numero_viaje, vuelo, dia_especifico, asientos_disponibles, promocion, numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from viajes, vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where viajes.vuelo=vuelos.numero_vuelo\n" +
+"                    and vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad\n";
             ResultSet rs =  airline.executeQuery(sql);
             while (rs.next()) {
                 viajes.add(toViaje(rs));
@@ -256,6 +260,7 @@ public class AirlineModel {
         }
        return viajes;
     }
+    
     public static List<Viaje> getPromo() throws Exception {
         List<Viaje> viajes;
         viajes= new ArrayList();
@@ -325,13 +330,38 @@ public class AirlineModel {
        return viaje;
     }
     
+    public static int viajeAdd(Viaje viaje){
+        String sql = "insert into viajes "
+                + "(vuelo, dia_especifico, asientos_disponibles, promocion)"
+                + "values (%d,'%s',%d,%d)";
+        sql = String.format(sql, viaje.getVuelo().getNumero_vuelo(),viaje.getDia_especifico(), viaje.getAsientos_disponibles(), viaje.getPromocion());
+        return airline.executeUpdate(sql);
+    }
+    
+    public static int viajeUpdate(Viaje viaje)
+    {
+        String sql="update viajes "+
+                    "set vuelo=%d, dia_especifico='%s', asientos_disponibles=%d, promocion='%s'"+
+                    " where numero_viaje=%d";
+            sql=String.format(sql,viaje.getVuelo().getNumero_vuelo(),viaje.getDia_especifico(),viaje.getAsientos_disponibles(),viaje.getPromocion(),viaje.getNumero_viaje());
+            int i = airline.executeUpdate(sql);
+            return i;
+    }
+    
+    public static int viajeDelete(Viaje viaje){
+        String sql = "delete from viajes "
+                + "where numero_viaje = "+Integer.toString(viaje.getNumero_viaje());
+        int i = airline.executeUpdate(sql);
+        return i;
+    }
+    
     
     
     private static Viaje toViaje(ResultSet rs) throws SQLException, Exception{
         Viaje obj= new Viaje();
         obj.setNumero_viaje(rs.getInt("numero_viaje"));
         obj.setVuelo(toVuelo(rs));
-        obj.setDia_especifico(rs.getDate("dia_especifico"));
+        obj.setDia_especifico(rs.getDate("dia_especifico").toString());
         obj.setAsientos_disponibles(rs.getInt("asientos_disponibles"));
         obj.setPromocion(rs.getInt("promocion"));
         return obj;

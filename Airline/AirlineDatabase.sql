@@ -88,7 +88,7 @@ constraint fk_avion foreign key(avion) references aviones(codigo_avion)
 
 
 create table viajes(
-numero_viaje integer not null,
+numero_viaje integer not null auto_increment,
 vuelo integer not null,
 dia_especifico date not null,
 asientos_disponibles integer not null,

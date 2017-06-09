@@ -277,6 +277,26 @@ public class AirlineService extends HttpServlet {
                     json = gson.toJson(vuelos);
                     out.write(json);
                     break;
+                case "ViajeInsert":
+                    json = request.getParameter("viaje");
+                    Viaje ViajeAdd= gson.fromJson(json, Viaje.class);
+                    out.write((AirlineModel.viajeAdd(ViajeAdd)==1)?"0":"1");
+                    break;
+                case "ViajeUpdate":
+                    json = request.getParameter("viaje");
+                    Viaje ViajeUpdate= gson.fromJson(json, Viaje.class);
+                    out.write((AirlineModel.viajeUpdate(ViajeUpdate)==1)?"0":"1");
+                    break; 
+                case "ViajeDelete":
+                    json = request.getParameter("viaje");
+                    Viaje ViajeDelete= gson.fromJson(json, Viaje.class);
+                    out.write((AirlineModel.viajeDelete(ViajeDelete)==1)?"0":"1");
+                    break; 
+                case "viajeList":
+                    viajes = AirlineModel.getViajes();
+                    json = gson.toJson(viajes);
+                    out.write(json);
+                    break;
                     
             }
         }
