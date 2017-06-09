@@ -149,10 +149,8 @@ insert into vuelos values (4, 'V', '5:30', 150, 4, 1);
 insert into vuelos values (5, 'V', '5:30', 150, 5, 1);
 
 insert into viajes values (1, 1, '2017/07/05', 30, 1);
-insert into viajes values (2, 2, '2017/07/06', 30, 1);
-insert into viajes values (3, 3, '2017/07/08', 30, 1);
 insert into viajes values (4, 4, '2017/07/09', 30, 1);
 insert into viajes values (7, 5, '2017/07/09', 30, 1);
 
-insert into viajes values (5, 1, '2017/07/05', 30, 1);
-insert into viajes values (6, 1, '2017/07/05', 30, 1);
+insert into viajes values (5, 1, '2017/07/05', 30, 0);
+insert into viajes values (6, 5, '2017/07/05', 30, 0);
