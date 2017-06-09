@@ -38,7 +38,7 @@
           <span class="glyphicon glyphicon-edit"></span> Gestion de Vuelos
         </a>
         <br><br>
-        <a href="#" class="btn btn-info btn-lg">
+        <a href="/Airline/Gestion_Viajes.jsp" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-edit"></span> Gestion de Viajes
         </a>
         
