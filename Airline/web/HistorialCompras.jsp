@@ -172,6 +172,9 @@
                 listado2.appendChild(tr);
            
         }
+        
+        
+        
         document.addEventListener("DOMContentLoaded", pageLoad);
     </script>
     </body>

@@ -140,7 +140,7 @@ insert into rutas(numero_ruta, origen, destino, duracion) values (3, 'SJO', 'GYE
 insert into rutas(numero_ruta, origen, destino, duracion) values (4, 'BGA', 'SJO', 4.30);
 insert into rutas(numero_ruta, origen, destino, duracion) values (5, 'GYE', 'MIA', 3.30);
 
-insert into aviones values(1, '2012', 'AAA', 'BBB', 30, 2, 15);
+insert into aviones values(1, '2012', 'AAA', 'BBB', 135, 15, 9);
 
 insert into vuelos values (1, 'L', '2:30', 120, 1, 1);
 insert into vuelos values (2, 'M', '3:30', 130, 2, 1);

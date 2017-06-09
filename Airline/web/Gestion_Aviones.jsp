@@ -74,7 +74,7 @@
                                         <div class="modal-footer">
                                             <center>
                                             <div>
-                                                <button class="btn btn-default" type="submit" id="btnSub" display="inline-block">Agregar</button><button display="inline-block" type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelar()" id="close">Cancelar</button>
+                                                <button class="btn btn-default" type="submit" id="btnSub" style="display:'inline-block'">Agregar</button><button style="display:'inline-block'" type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelar()" id="close">Cancelar</button>
                                             </div>
                                             </center>
                                         </div>
