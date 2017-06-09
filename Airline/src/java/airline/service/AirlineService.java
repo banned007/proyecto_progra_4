@@ -72,6 +72,7 @@ public class AirlineService extends HttpServlet {
             List<Tiquete> tiquetes;
             Cliente client;
             List<Avion> aviones;
+            List<Ruta> rutas;
             switch(accion){
                 case "ciudadListAll":
                     ciudades = AirlineModel.getCiudades();
@@ -220,6 +221,61 @@ public class AirlineService extends HttpServlet {
                     json = request.getParameter("avion");
                     Avion AvionDelete= gson.fromJson(json, Avion.class);
                     out.write((AirlineModel.avionDelete(AvionDelete)==1)?"0":"1");
+                    break;
+                case "CiudadInsert":
+                    json = request.getParameter("ciudad");
+                    Ciudad CiudadAdd= gson.fromJson(json, Ciudad.class);
+                    out.write((AirlineModel.ciudadAdd(CiudadAdd)==1)?"0":"1");
+                    break;
+                case "CiudadUpdate":
+                    json = request.getParameter("ciudad");
+                    Ciudad CiudadUpdate= gson.fromJson(json, Ciudad.class);
+                    out.write((AirlineModel.ciudadUpdate(CiudadUpdate)==1)?"0":"1");
+                    break;
+                case "CiudadDelete":
+                    json = request.getParameter("ciudad");
+                    Ciudad CiudadDelete= gson.fromJson(json, Ciudad.class);
+                    out.write((AirlineModel.ciudadDelete(CiudadDelete)==1)?"0":"1");
+                    break;
+                case "rutaSeacrh":
+                    rutas = AirlineModel.getRutas();
+                    json = gson.toJson(rutas);
+                    out.write(json);
+                    break;
+                case "RutaInsert":
+                    json = request.getParameter("ruta");
+                    Ruta RutaAdd= gson.fromJson(json, Ruta.class);
+                    out.write((AirlineModel.rutaAdd(RutaAdd)==1)?"0":"1");
+                    break;
+                case "RutaDelete":
+                    json = request.getParameter("ruta");
+                    Ruta RutaDelete= gson.fromJson(json, Ruta.class);
+                    out.write((AirlineModel.rutaDelete(RutaDelete)==1)?"0":"1");
+                    break;
+                case "RutaUpdate":
+                    json = request.getParameter("ruta");
+                    Ruta RutaUpdate= gson.fromJson(json, Ruta.class);
+                    out.write((AirlineModel.rutaUpdate(RutaUpdate)==1)?"0":"1");
+                    break;
+                case "VueloInsert":
+                    json = request.getParameter("vuelo");
+                    Vuelo VueloAdd= gson.fromJson(json, Vuelo.class);
+                    out.write((AirlineModel.vueloAdd(VueloAdd)==1)?"0":"1");
+                    break;
+                case "VueloUpdate":
+                    json = request.getParameter("vuelo");
+                    Vuelo VueloUpdate= gson.fromJson(json, Vuelo.class);
+                    out.write((AirlineModel.vueloUpdate(VueloUpdate)==1)?"0":"1");
+                    break;
+                case "VueloDelete":
+                    json = request.getParameter("vuelo");
+                    Vuelo VueloDelete= gson.fromJson(json, Vuelo.class);
+                    out.write((AirlineModel.vueloDelete(VueloDelete)==1)?"0":"1");
+                    break;
+                case "vueloSeacrh":
+                    vuelos = AirlineModel.getVuelos();
+                    json = gson.toJson(vuelos);
+                    out.write(json);
                     break;
                     
             }

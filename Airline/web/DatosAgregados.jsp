@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Contactenos</title>
+        <title>Datos Agregados</title>
         <%@ include file="Imports.jspf" %>        
     </head>
     <body>

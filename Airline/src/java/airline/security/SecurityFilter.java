@@ -36,7 +36,7 @@ import javax.servlet.http.HttpSession;
 public class SecurityFilter implements Filter {
 
     List<String> clientActions = Arrays.asList("/Pago.jsp","/CompraImprimir.jsp", "/HistorialCompras.jsp", "/sign-up.jsp");
-    List<String> managerActions = Arrays.asList("/AdminMenu.jsp", "/Gestion_Aviones.jsp");
+    List<String> managerActions = Arrays.asList("/AdminMenu.jsp", "/Gestion_Aviones.jsp", "/Gestion_Vuelos.jsp", "/Gestion_Rutas.jsp", "/Gestion_Ciudades.jsp");
     List<String>[] userActions;
     
     public SecurityFilter() {

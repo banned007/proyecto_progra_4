@@ -108,8 +108,9 @@ public class AirlineModel {
         List<Ruta> rutas;
        rutas= new ArrayList();
         try {
-            String sql="select * from "+
-                    "rutas";
+            String sql="select numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from rutas, ciudades, ciudades as c2\n" +
+                    "where rutas.origen=ciudades.codigo_ciudad\n" +
+                    "and rutas.destino=c2.codigo_ciudad";  
             ResultSet rs =  airline.executeQuery(sql);
             while (rs.next()) {
                 rutas.add(toRuta(rs));
@@ -117,6 +118,27 @@ public class AirlineModel {
         } catch (SQLException ex) {
         }
        return rutas;
+    }
+    
+    public static int rutaAdd(Ruta ruta){
+        String sql = "insert into rutas "
+                + "values (%d,'%s','%s',%f)";
+        sql = String.format(sql, ruta.getNumero(), ruta.getOrigen().getCodigo(), ruta.getDestino().getCodigo(), ruta.getDuracion());
+        return airline.executeUpdate(sql);
+    }
+    
+    public static int rutaUpdate(Ruta ruta){
+        String sql = "update rutas "
+                + " set origen = \""+ruta.getOrigen().getCodigo()+"\", destino = \""+ruta.getDestino().getCodigo()+"\", duracion = "+Float.toString(ruta.getDuracion())
+                + " where numero_ruta = "+Integer.toString(ruta.getNumero());
+        int i=airline.executeUpdate(sql);
+        return i;
+    }
+    
+    public static int rutaDelete(Ruta ruta){
+        String sql = "delete from rutas where numero_ruta = "+Integer.toString(ruta.getNumero());
+        int i = airline.executeUpdate(sql);
+        return i;
     }
     
     private static Ruta toRuta(ResultSet rs) throws SQLException, Exception{
@@ -132,8 +154,11 @@ public class AirlineModel {
         List<Vuelo> vuelos;
        vuelos= new ArrayList();
         try {
-            String sql="select * from "+
-                    "vuelos";
+            String sql="select numero_vuelo, dia, hora, precio, ruta, avion, codigo_avion, annio, modelo, marca, cant_pasajeros, cant_filas, cant_asientos_fila, numero_ruta, origen, destino, duracion, ciudades.codigo_ciudad as codigo_ciudad_origen, ciudades.nombre_ciudad as nombre_ciudad_origen, ciudades.pais as pais_origen, c2.codigo_ciudad, c2.nombre_ciudad, c2.pais from vuelos, aviones, rutas, ciudades, ciudades as c2\n" +
+"                    where vuelos.avion=codigo_avion\n" +
+"                    and vuelos.ruta=rutas.numero_ruta\n" +
+"                    and rutas.origen=ciudades.codigo_ciudad\n" +
+"                    and rutas.destino=c2.codigo_ciudad";
             ResultSet rs =  airline.executeQuery(sql);
             while (rs.next()) {
                 vuelos.add(toVuelo(rs));
@@ -141,6 +166,28 @@ public class AirlineModel {
         } catch (SQLException ex) {
         }
        return vuelos;
+    }
+    
+    public static int vueloAdd(Vuelo vuelo){
+        String sql = "insert into vuelos "
+                + "values (%d,'%s','%s',%f,%d,%d)";
+        sql = String.format(sql, vuelo.getNumero_vuelo(), vuelo.getDia(),vuelo.getHora(), vuelo.getPrecio(),vuelo.getRuta().getNumero(),vuelo.getAvion().getCodigo_avion());
+        return airline.executeUpdate(sql);
+    }
+    
+    public static int vueloUpdate(Vuelo vuelo){
+        String sql="update vuelos "+
+                    "set dia='%s', hora='%s', precio=%f, ruta=%d, avion=%d"+
+                    " where numero_vuelo=%d";
+            sql=String.format(sql,vuelo.getDia(),vuelo.getHora(),vuelo.getPrecio(),vuelo.getRuta().getNumero(),vuelo.getAvion().getCodigo_avion(),vuelo.getNumero_vuelo());
+            System.out.println(sql);
+            return airline.executeUpdate(sql);
+    }
+    
+    public static int vueloDelete(Vuelo vuelo){
+        String sql = "delete from vuelos where numero_vuelo = "+Integer.toString(vuelo.getNumero_vuelo());
+        int i = airline.executeUpdate(sql);
+        return i;
     }
     
     public static int registrarCompra(Compra compra) throws SQLException{
@@ -471,6 +518,28 @@ public class AirlineModel {
     {
         String sql = "delete from aviones "
                 + "where codigo_avion = "+Integer.toString(avion.codigo_avion);
+        int i = airline.executeUpdate(sql);
+        return i;
+    }
+    
+    public static int ciudadAdd(Ciudad ciudad){
+        String sql = "insert into ciudades "
+                + "values ('%s','%s','%s')";
+        sql = String.format(sql, ciudad.getCodigo(), ciudad.getNombre(), ciudad.getPais());
+        return airline.executeUpdate(sql);
+    }
+    
+    public static int ciudadUpdate(Ciudad ciudad){
+        String sql = "update ciudades "
+                + " set nombre_ciudad = \""+ciudad.getNombre()+"\", pais = \""+ciudad.getPais()
+                + "\" where codigo_ciudad = \""+ciudad.getCodigo()+"\"";
+        int i=airline.executeUpdate(sql);
+        return i;
+    }
+    
+    public static int ciudadDelete(Ciudad ciudad){
+        String sql = "delete from ciudades "
+                + "where codigo_ciudad = \""+ciudad.getCodigo()+"\"";
         int i = airline.executeUpdate(sql);
         return i;
     }

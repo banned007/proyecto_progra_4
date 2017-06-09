@@ -25,6 +25,22 @@
         <a href="/Airline/Gestion_Aviones.jsp" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-edit"></span> Gestion de Aviones
         </a>
+        <br><br>
+        <a href="/Airline/Gestion_Ciudades.jsp" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-edit"></span> Gestion de Ciudades
+        </a>
+        <br><br>
+        <a href="/Airline/Gestion_Rutas.jsp" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-edit"></span> Gestion de Rutas
+        </a>
+        <br><br>
+        <a href="/Airline/Gestion_Vuelos.jsp" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-edit"></span> Gestion de Vuelos
+        </a>
+        <br><br>
+        <a href="#" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-edit"></span> Gestion de Viajes
+        </a>
         
     </div>
     </div>
